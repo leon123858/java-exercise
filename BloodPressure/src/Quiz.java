@@ -10,7 +10,7 @@ public class Quiz {
         TextFileReader reader = new TextFileReader(args[0]);
         FakeEnv env = reader.readInputLines();
         // monitor
-        for(int i=0;i<=3000;i++){
+        for(int i=0;i<=env.total_period;i++){
             List<Patient> patients = env.patients;
             for (Patient item : patients) {
                 if(i % item.period == 0){
@@ -36,7 +36,7 @@ public class Quiz {
             System.out.printf("%s %s\n", "patient", item.name);
             for (Sensor sensor : item.sensors) {
                 System.out.printf("%s %s\n", sensor.type, sensor.name);
-                for(int i=0;i<=3000;i++){
+                for(int i=0;i<=newEnv.total_period;i++){
                     if(i % item.period == 0){
                         System.out.printf("[%d] %.1f\n", i, sensor.getData());
                     }
