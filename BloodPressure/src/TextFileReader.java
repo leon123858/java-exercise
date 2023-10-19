@@ -26,7 +26,7 @@ public class TextFileReader {
         }
     }
 
-    public FakeEnv readInputLines() {
+    public Hospital readInputLines() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             int idx = 0;
@@ -37,35 +37,69 @@ public class TextFileReader {
             int patientPeriod = 0;
             while ((line = reader.readLine()) != null) {
                 idx++;
-//                System.out.println(line);
                 if(idx == 1){
-                    period =Integer.parseInt(line);
+                    try {
+                        period = Integer.parseInt(line);
+                    }catch (Exception e){
+                        System.out.println("Input Error");
+                        idx--;
+                    }
                     continue;
                 }
                 String[] words = line.split(" ");
                 if(words[0].equals("patient")){
+                    if(words.length != 3){
+                        System.out.println("Input Error");
+                        idx--;
+                        continue;
+                    }
+                    int tmpPatientPeriod = 0;
+                    try {
+                        tmpPatientPeriod = Integer.parseInt(words[2]);
+                    }catch (Exception e){
+                        System.out.println("Input Error");
+                        idx--;
+                        continue;
+                    }
                     if(!patientName.isEmpty()){
                         pations.add(new Patient(patientName,patientPeriod,sensors));
                     }
+                    patientPeriod = tmpPatientPeriod;
                     patientName = words[1];
-                    patientPeriod = Integer.parseInt(words[2]);
                     sensors = new ArrayList<>();
+                    continue;
+                }
+                if (words.length != 5) {
+                    System.out.println("Input Error");
+                    idx--;
+                    continue;
+                }
+                if(patientName.isEmpty()){
+                    System.out.println("Input Error");
+                    idx--;
+                    continue;
+                }
+                float lowBound = 0;
+                float upBound = 0;
+                try {
+                    lowBound = Float.parseFloat(words[3]);
+                    upBound = Float.parseFloat(words[4]);
+                }catch (Exception e){
+                    System.out.println("Input Error");
+                    idx--;
                     continue;
                 }
                 String type = words[0];
                 String name = words[1];
                 List<Float> dataList = readDataPath(words[2]);
-                int lowBound = Integer.parseInt(words[3]);
-                int upBound = Integer.parseInt(words[4]);
                 Sensor newSensor = new Sensor(type,name,upBound,lowBound,dataList);
                 sensors.add(newSensor);
-                continue;
             }
             pations.add(new Patient(patientName,patientPeriod,sensors));
-            return new FakeEnv(period,pations);
+            return new Hospital(period,pations);
         } catch (IOException e) {
             e.printStackTrace();
-            return new FakeEnv(0,new ArrayList<>());
+            return new Hospital(0,new ArrayList<>());
         }
     }
 

@@ -8,7 +8,7 @@ public class Quiz {
         }
         // read input file
         TextFileReader reader = new TextFileReader(args[0]);
-        FakeEnv env = reader.readInputLines();
+        Hospital env = reader.readInputLines();
         // monitor
         for(int i=0;i<=env.total_period;i++){
             List<Patient> patients = env.patients;
@@ -30,7 +30,7 @@ public class Quiz {
             }
         }
         // log
-        FakeEnv newEnv = reader.readInputLines();
+        Hospital newEnv = reader.readInputLines();
         List<Patient> patients = newEnv.patients;
         for (Patient item : patients) {
             System.out.printf("%s %s\n", "patient", item.name);
