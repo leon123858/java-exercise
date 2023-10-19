@@ -26,7 +26,7 @@ public class TextFileReader {
         }
     }
 
-    public Hospital readInputLines() {
+    public Hospital readInputLines(boolean isLog) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             int idx = 0;
@@ -41,7 +41,9 @@ public class TextFileReader {
                     try {
                         period = Integer.parseInt(line);
                     }catch (Exception e){
-                        System.out.println("Input Error");
+                        if(isLog){
+                            System.out.println("Input Error");
+                        }
                         idx--;
                     }
                     continue;
@@ -49,7 +51,9 @@ public class TextFileReader {
                 String[] words = line.split(" ");
                 if(words[0].equals("patient")){
                     if(words.length != 3){
-                        System.out.println("Input Error");
+                        if(isLog){
+                            System.out.println("Input Error");
+                        }
                         idx--;
                         continue;
                     }
@@ -57,7 +61,9 @@ public class TextFileReader {
                     try {
                         tmpPatientPeriod = Integer.parseInt(words[2]);
                     }catch (Exception e){
-                        System.out.println("Input Error");
+                        if(isLog){
+                            System.out.println("Input Error");
+                        }
                         idx--;
                         continue;
                     }
@@ -70,12 +76,16 @@ public class TextFileReader {
                     continue;
                 }
                 if (words.length != 5) {
-                    System.out.println("Input Error");
+                    if(isLog){
+                        System.out.println("Input Error");
+                    }
                     idx--;
                     continue;
                 }
                 if(patientName.isEmpty()){
-                    System.out.println("Input Error");
+                    if(isLog){
+                        System.out.println("Input Error");
+                    }
                     idx--;
                     continue;
                 }
@@ -85,7 +95,9 @@ public class TextFileReader {
                     lowBound = Float.parseFloat(words[3]);
                     upBound = Float.parseFloat(words[4]);
                 }catch (Exception e){
-                    System.out.println("Input Error");
+                    if(isLog){
+                        System.out.println("Input Error");
+                    }
                     idx--;
                     continue;
                 }
@@ -95,7 +107,9 @@ public class TextFileReader {
                 Sensor newSensor = new Sensor(type,name,upBound,lowBound,dataList);
                 sensors.add(newSensor);
             }
-            pations.add(new Patient(patientName,patientPeriod,sensors));
+            if(!patientName.isEmpty()){
+                pations.add(new Patient(patientName,patientPeriod,sensors));
+            }
             return new Hospital(period,pations);
         } catch (IOException e) {
             e.printStackTrace();
