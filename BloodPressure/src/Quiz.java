@@ -3,7 +3,7 @@ import java.util.List;
 public class Quiz {
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.out.println("沒有指定參數。");
+            System.out.println("Input Error");
             return;
         }
         // read input file
