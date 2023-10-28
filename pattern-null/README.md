@@ -102,43 +102,55 @@ final dynamic class diagram
 
 ```mermaid
 classDiagram
-direction BT
-class AbstractPerson
-class AverageCalculator
-class Calculator {
-<<Interface>>
+    direction BT
+    class AbstractPerson
+    class AverageCalculator
+    class Calculator {
+        <<Interface>>
 
-}
-class Command
-class CommandFactory
-class GetCommand
-class GetHeightAvgCommand
-class GetHeightCommand
-class GetHeightSumCommand
-class GetJobCommand
-class GetWeightAvgCommand
-class GetWeightCommand
-class GetWeightSumCommand
-class Main
-class NullPerson
-class Person
-class SetCommand
-class SetPersonCommand
-class SumCalculator
+    }
+    class Command
+    class CommandFactory
+    class GetCommand
+    class GetHeightAvgCommand
+    class GetHeightCommand
+    class GetHeightSumCommand
+    class GetJobCommand
+    class GetWeightAvgCommand
+    class GetWeightCommand
+    class GetWeightSumCommand
+    class Main
+    class NullPerson
+    class Person
+    class SetCommand
+    class SetPersonCommand
+    class SumCalculator
 
-AverageCalculator  -->  SumCalculator 
-GetCommand  -->  Command 
-GetHeightAvgCommand  -->  GetHeightCommand 
-GetHeightCommand  -->  GetCommand 
-GetHeightSumCommand  -->  GetHeightCommand 
-GetJobCommand  -->  GetCommand 
-GetWeightAvgCommand  -->  GetWeightCommand 
-GetWeightCommand  -->  GetCommand 
-GetWeightSumCommand  -->  GetWeightCommand 
-NullPerson  -->  AbstractPerson 
-Person  -->  AbstractPerson 
-SetCommand  -->  Command 
-SetPersonCommand  -->  SetCommand 
-SumCalculator  ..>  Calculator 
+    AverageCalculator  -->  SumCalculator
+    CommandFactory  ..>  GetHeightAvgCommand : «create»
+    CommandFactory  ..>  GetHeightSumCommand : «create»
+    CommandFactory  ..>  GetJobCommand : «create»
+    CommandFactory  ..>  GetWeightAvgCommand : «create»
+    CommandFactory  ..>  GetWeightSumCommand : «create»
+    CommandFactory  ..>  SetPersonCommand : «create»
+    GetCommand  -->  Command
+    GetHeightAvgCommand  ..>  AverageCalculator : «create»
+    GetHeightAvgCommand  -->  GetHeightCommand
+    GetHeightCommand  -->  GetCommand
+    GetHeightSumCommand  -->  GetHeightCommand
+    GetHeightSumCommand  ..>  SumCalculator : «create»
+    GetJobCommand  -->  GetCommand
+    GetWeightAvgCommand  ..>  AverageCalculator : «create»
+    GetWeightAvgCommand  -->  GetWeightCommand
+    GetWeightCommand  -->  GetCommand
+    GetWeightSumCommand  -->  GetWeightCommand
+    GetWeightSumCommand  ..>  SumCalculator : «create»
+    NullPerson  -->  AbstractPerson
+    Person  -->  AbstractPerson
+    SetCommand  -->  Command
+    SetPersonCommand  ..>  NullPerson : «create»
+    SetPersonCommand  ..>  Person : «create»
+    SetPersonCommand  -->  SetCommand
+    SumCalculator  ..>  Calculator
 
 ```
