@@ -22,7 +22,7 @@ public class SetPersonCommand extends SetCommand{
             // check weight and height is int bigger than 0
             int weight = Integer.parseInt(this.args[2]);
             int height = Integer.parseInt(this.args[3]);
-            if (weight <= 0 || height <= 0) {
+            if (weight < 0 || height < 0) {
                 throw new Exception();
             }
             person = new Person();
