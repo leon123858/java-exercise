@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a5497d93-22f9-4d2e-9dfd-f8bcdf408d7a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/doc/HW1 - Text Composition SPEC 10262023/TextComposition_SPEC.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/doc/HW1 - Text Composition SPEC 10262023/sampleInput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/doc/HW1 - Text Composition SPEC 10262023/sampleOutput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/pattern-composition.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/ArrayComposition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/BreakStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/BreakStrategyFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/CommandHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/CommandType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/EditHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/Element.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/ElementHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/ElementPrinter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/IBreakStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/RequireHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/SimpleComposition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/editor/TexComposition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/sampleInput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-composition/src/sampleOutput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/doc/HW2 - Spreadsheet SPEC 10262023/SpreadsheetApplication_SPEC.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/doc/HW2 - Spreadsheet SPEC 10262023/sampleInput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/doc/HW2 - Spreadsheet SPEC 10262023/sampleOutput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/pattern-oop.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/cmd/AddChartCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/cmd/ChangeCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/cmd/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/cmd/CommandFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/cmd/CommandType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/cmd/DataCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/data/DataStore.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/data/Record.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/displayer/BarChartDisplayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/displayer/ChartType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/displayer/Displayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/displayer/DisplayerFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/displayer/PieChartDisplayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/displayer/SpreadsheetDisplayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/sampleInput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-oop/src/sampleOutput" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2XgIOr5bxtn1lixzHKz9fPTB83i" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a5497d93-22f9-4d2e-9dfd-f8bcdf408d7a" name="Changes" comment="" />
+      <created>1699044266548</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699044266548</updated>
+      <workItem from="1699044267548" duration="2000" />
+    </task>
+    <servers />
+  </component>
+</project>
