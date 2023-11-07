@@ -2,33 +2,19 @@ package TextView;
 
 import java.util.ArrayList;
 
-public class TextView {
-    public final String name;
-    public final String text;
-    private Element[] elements;
-
-    public TextView(String name, String text) {
-        this.name = name;
-        this.text = text;
-        this.elements = new Element[0];
-    }
+public class TextView implements View {
+    private final ArrayList<Element> elements = new ArrayList<>();
 
     public void addElement(Element element) {
-        // check if element name already exists
         for (Element existingElement : this.elements) {
             if (existingElement.getName().equals(element.getName())) {
                 throw new IllegalArgumentException("Element name already exists");
             }
         }
-        Element[] newElements = new Element[this.elements.length + 1];
-        System.arraycopy(this.elements, 0, newElements, 0, this.elements.length);
-        newElements[this.elements.length] = element;
-        this.elements = newElements;
+        this.elements.add(element);
     }
 
-    public void draw() {
-        ArrayList<String> outputStrings = new ArrayList<>();
-        outputStrings.add(this.text);
+    public void draw(ArrayList<String> outputStrings) {
         for (Element element : this.elements) {
             outputStrings.add(element.getName());
         }

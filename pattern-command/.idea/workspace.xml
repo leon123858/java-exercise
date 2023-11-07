@@ -5,9 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5497d93-22f9-4d2e-9dfd-f8bcdf408d7a" name="Changes" comment="hw2 ok">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Document/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Document/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/FileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/doc/HW2 - Powerful Document Viewer 11022023/PowerfulDocumentViewer _Spec.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/doc/HW2 - Powerful Document Viewer 11022023/sampleInput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/doc/HW2 - Powerful Document Viewer 11022023/sampleOutput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/pattern-doc.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Command/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Command/DrawCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Command/PresentCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Command/TextCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Document/Document.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Document/DrawDocument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Document/TextDocument.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/Service/FileService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/sampleInput" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pattern-doc/src/sampleOutput" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +91,7 @@
       <workItem from="1699044267548" duration="2000" />
       <workItem from="1699080987732" duration="5066000" />
       <workItem from="1699356323230" duration="269000" />
+      <workItem from="1699383107537" duration="67000" />
     </task>
     <task id="LOCAL-00001" summary="hw2 ok">
       <option name="closed" value="true" />
