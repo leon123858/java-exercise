@@ -11,13 +11,6 @@ public class FileService {
     }
 
     public void writeDocument(Document document) {
-        document.write();
-        for (Document doc : this.documents) {
-            if (Objects.equals(doc.type, document.type)) {
-//                System.out.println("Document already exists");
-                return;
-            }
-        }
         this.documents.add(document);
     }
 
