@@ -2,66 +2,9 @@
 
 ## origin design
 
-```mermaid
-classDiagram
-    direction BT
-    class Element
-    class ElementType {
-        <<enumeration>>
-    }
-    class ScrollBar
-    class TextView
-    class ThickBlackBorder
-    class ViewService
+![image](https://github.com/leon123858/java-exercise/assets/56253942/f8cdb747-a419-4d57-a27d-a35a048755fb)
 
-    Element "1" *--> "type 1" ElementType
-    ScrollBar --|> Element
-    TextView --> Element: «create»
-    TextView "1" *--> "elements *" Element
-    ThickBlackBorder --|> Element
-    ViewService --> TextView: «create»
-    ViewService "1" *--> "views *" TextView
-
-```
 
 ## final design
 
-```mermaid
-classDiagram
-    direction BT
-    class AddCommand
-    class Command {
-        <<Interface>>
-    }
-    class CommandFactory
-    class DefineCommand
-    class DisplayCommand
-    class Element
-    class ElementType {
-        <<enumeration>>
-    }
-    class Main
-    class ScrollBar
-    class TextView
-    class ThickBlackBorder
-    class ViewService
-
-    AddCommand ..> Command
-    AddCommand ..> ScrollBar: «create»
-    AddCommand ..> ThickBlackBorder: «create»
-    CommandFactory ..> AddCommand: «create»
-    CommandFactory ..> DefineCommand: «create»
-    CommandFactory ..> DisplayCommand: «create»
-    DefineCommand ..> Command
-    DefineCommand ..> TextView: «create»
-    DisplayCommand ..> Command
-    Element "1" *--> "type 1" ElementType
-    Main ..> ViewService: «create»
-    ScrollBar --> Element
-    TextView ..> Element: «create»
-    TextView "1" *--> "elements *" Element
-    ThickBlackBorder --> Element
-    ViewService ..> TextView: «create»
-    ViewService "1" *--> "views *" TextView
-
-```
+![image](https://github.com/leon123858/java-exercise/assets/56253942/21f7f1b3-c8ed-4eaa-ab05-250e7acf7fb6)
