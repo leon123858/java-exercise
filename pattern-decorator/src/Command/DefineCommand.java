@@ -3,7 +3,7 @@ package Command;
 import Service.ViewService;
 import TextView.TextView;
 
-public class DefineCommand implements Command{
+public class DefineCommand implements Command {
     String ViewName;
     String ViewText;
 
@@ -14,6 +14,7 @@ public class DefineCommand implements Command{
         ViewName = args[0];
         ViewText = args[1];
     }
+
     @Override
     public void execute(ViewService viewService) {
         TextView textView = new TextView(ViewName, ViewText);

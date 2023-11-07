@@ -1,7 +1,7 @@
 package Service;
 
-import TextView.TextView;
 import TextView.Element;
+import TextView.TextView;
 
 public class ViewService {
     private TextView[] views;
@@ -25,7 +25,7 @@ public class ViewService {
 
     public void addViewElement(String viewName, Element element) {
         for (TextView view : this.views) {
-            if(view.name.equals(viewName)) {
+            if (view.name.equals(viewName)) {
                 view.addElement(element);
                 return;
             }
@@ -35,7 +35,7 @@ public class ViewService {
 
     public void display(String viewName) {
         for (TextView view : this.views) {
-            if(view.name.equals(viewName)) {
+            if (view.name.equals(viewName)) {
                 view.draw();
                 return;
             }

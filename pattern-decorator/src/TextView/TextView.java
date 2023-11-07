@@ -3,9 +3,9 @@ package TextView;
 import java.util.ArrayList;
 
 public class TextView {
-    private Element[] elements;
     public final String name;
     public final String text;
+    private Element[] elements;
 
     public TextView(String name, String text) {
         this.name = name;
@@ -27,7 +27,7 @@ public class TextView {
     }
 
     public void draw() {
-        ArrayList<String> outputStrings = new ArrayList<String>();
+        ArrayList<String> outputStrings = new ArrayList<>();
         outputStrings.add(this.text);
         for (Element element : this.elements) {
             outputStrings.add(element.getName());
