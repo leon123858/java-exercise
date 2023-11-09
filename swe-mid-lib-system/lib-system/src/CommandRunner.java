@@ -7,7 +7,7 @@ public class CommandRunner {
     public static void run(String path) {
         BookService bookService = new BookService();
         UserService userService = new UserService();
-        ILibrarySystem inLibrarySystem = new LibrarySystem(bookService, userService);
+        ILibrarySystem inLibrarySystem = new LibrarySystemImplement(bookService, userService);
         LibrarySystemDecorator librarySystem = new AuthorityDecorator(inLibrarySystem, userService);
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
