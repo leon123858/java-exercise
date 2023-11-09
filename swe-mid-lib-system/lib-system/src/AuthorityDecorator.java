@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class AuthorityDecorator extends LibrarySystemDecorator{
+public class AuthorityDecorator extends LibrarySystemDecorator {
     private final UserService userService;
 
     public AuthorityDecorator(ILibrarySystem librarySystem, UserService userService) {

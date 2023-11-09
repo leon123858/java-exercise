@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 public class LibrarySystem implements ILibrarySystem {
     private final UserService userService;
@@ -14,7 +17,7 @@ public class LibrarySystem implements ILibrarySystem {
     public void CheckOut(String staffName, String borrowerName, List<Integer> bookIds) throws Exception {
         var borrower = userService.getUserByName(borrowerName);
 
-        if (bookIds.size() > ((Borrower)borrower).getBorrowBookLimit())
+        if (bookIds.size() > ((Borrower) borrower).getBorrowBookLimit())
             throw new Exception("Can not check out since the number of books exceed the limitation of user can check-out");
 
         var borrowBooks = new HashSet<Book>();
@@ -84,7 +87,7 @@ public class LibrarySystem implements ILibrarySystem {
     }
 
     public void GetBorrower(String staffName, int bookId) {
-        for(var c : checkOutList) {
+        for (var c : checkOutList) {
             if (c.getBook().getId() == bookId) {
                 System.out.println("User: " + c.getBorrower().getName());
             }
