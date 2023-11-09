@@ -5,6 +5,7 @@ public class LibrarySystem implements ILibrarySystem {
     private final UserService userService;
     private final BookService bookService;
     private final List<CheckOut> checkOutList = new LinkedList<>();
+    private final List<CheckOut> checkOutHistory = new LinkedList<>();
 
     public LibrarySystem(BookService bookService, UserService userService) {
         this.bookService = bookService;
@@ -14,7 +15,7 @@ public class LibrarySystem implements ILibrarySystem {
     public void CheckOut(String staffName, String borrowerName, List<Integer> bookIds) throws Exception {
         var borrower = userService.getUserByName(borrowerName);
 
-        if (bookIds.size() > ((Borrower)borrower).getBorrowBookLimit())
+        if (bookIds.size() > ((Borrower) borrower).getBorrowBookLimit())
             throw new Exception("Can not check out since the number of books exceed the limitation of user can check-out");
 
         var borrowBooks = new HashSet<Book>();
@@ -45,8 +46,14 @@ public class LibrarySystem implements ILibrarySystem {
         if (!book.getIsCheckedOut())
             throw new Exception("Can not return since the book isn't checked out");
 
+        var checkout = checkOutList.stream()
+                .filter(c -> c.getBook().equals(book))
+                .findFirst()
+                .orElse(null);
+
         book.returnBook();
-        checkOutList.removeIf(c -> c.getBook().equals(book));
+        checkOutHistory.add(checkout);
+        checkOutList.remove(checkout);
     }
 
     public void AddBook(String staffName, String author, String subject) {
@@ -83,11 +90,35 @@ public class LibrarySystem implements ILibrarySystem {
         }
     }
 
-    public void GetBorrower(String staffName, int bookId) {
-        for(var c : checkOutList) {
-            if (c.getBook().getId() == bookId) {
-                System.out.println("User: " + c.getBorrower().getName());
+    public void GetBorrower(String staffName, int bookId) throws Exception {
+        var book = bookService.GetBookById(bookId);
+        var checkout = checkOutList.stream()
+                .filter(c -> c.getBook().equals(book))
+                .findFirst()
+                .orElse(null);
+
+        if (checkout != null)
+            System.out.println("User: " + checkout.getBorrower().getName());
+        else {
+            var history = new ArrayList<>(checkOutHistory.stream()
+                    .filter(c -> c.getBook().equals(book))
+                    .toList());
+
+            if (history.isEmpty()) {
+                System.out.println("User: ");
+                return;
             }
+
+            var dateTimeComparator = new Comparator<CheckOut>() {
+                @Override
+                public int compare(CheckOut checkOut1, CheckOut checkOut2) {
+                    return checkOut1.getTime().compareTo(checkOut2.getTime());
+                }
+            };
+
+            history.sort(dateTimeComparator);
+
+            System.out.println("User: " + history.get(history.size() - 1).getBorrower().getName());
         }
     }
 

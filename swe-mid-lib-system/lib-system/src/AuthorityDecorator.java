@@ -11,6 +11,10 @@ public class AuthorityDecorator extends LibrarySystemDecorator{
     @Override
     public void CheckOut(String staffName, String borrowerName, List<Integer> bookIds) throws Exception {
         var staff = userService.getUserByName(staffName);
+        var borrower = userService.getUserByName(borrowerName);
+
+        if (borrower instanceof Staff)
+            throw new Exception("Error");
 
         if (staff instanceof Borrower)
             throw new Exception("Borrower can not check out the books");
