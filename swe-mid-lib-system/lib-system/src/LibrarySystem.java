@@ -12,18 +12,20 @@ public class LibrarySystem implements ILibrarySystem {
     }
 
     public void CheckOut(String staffName, String borrowerName, List<Integer> bookIds) throws Exception {
-        var staff = userService.getUserByName(staffName);
         var borrower = userService.getUserByName(borrowerName);
 
         if (bookIds.size() > ((Borrower)borrower).getBorrowBookLimit())
             throw new Exception("Can not check out since the number of books exceed the limitation of user can check-out");
 
-        var borrowBooks = new LinkedList<Book>();
+        var borrowBooks = new HashSet<Book>();
         for (var id : bookIds) {
             var book = bookService.GetBookById(id);
 
             if (book.getIsCheckedOut())
                 throw new Exception("Can not check out since the book is checked out");
+
+            if (borrowBooks.contains(book))
+                throw new Exception("Error");
 
             borrowBooks.add(book);
         }

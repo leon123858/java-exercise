@@ -18,7 +18,7 @@ public class BookService {
                 .orElse(null);
 
         if (book == null)
-            throw new Exception("No such book");
+            throw new Exception("Error");
 
         if (book.getIsCheckedOut())
             throw new Exception("Error");
@@ -33,7 +33,7 @@ public class BookService {
                 .orElse(null);
 
         if (book == null)
-            throw new Exception("No such book");
+            throw new Exception("Error");
 
         return book;
     }
