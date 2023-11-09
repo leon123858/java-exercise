@@ -2,14 +2,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class CommandParser {
-    public static void parse(String path) {
+public class CommandRunner {
+    public static void run(String path) {
+        BookService bookService = new BookService();
+        UserService userService = new UserService();
+        ILibrarySystem librarySystem = new LibrarySystem(bookService, userService);
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             Mode mode = Mode.BOOKS_INIT;
             int numInputLine = 0;
             int curNumInputLine = -1;
+            String User1 = "";
+            String User2 = "";
             while ((line = br.readLine()) != null) {
                 if (curNumInputLine == numInputLine) {
                     if (mode == Mode.BOOKS) {
@@ -34,7 +40,7 @@ public class CommandParser {
                             num = Integer.parseInt(words[0]);
                         } catch (NumberFormatException e) {
                             System.out.println("Invalid number input");
-                            num = 0;
+                            continue;
                         }
                         if (num <= 0) {
                             System.out.println("number should be positive");
@@ -56,9 +62,12 @@ public class CommandParser {
                         // [author] [subject]
                         String author = words[0];
                         String subject = words[1];
-                        // TODO: call add book function
                         curNumInputLine++;
-                        System.out.println("add book");
+                        try {
+                            bookService.AddBook(author, subject);
+                        } catch (Exception e) {
+                            System.out.println("Invalid input");
+                        }
                         break;
                     }
                     case USERS_INIT: {
@@ -72,7 +81,7 @@ public class CommandParser {
                             num = Integer.parseInt(words[0]);
                         } catch (NumberFormatException e) {
                             System.out.println("Invalid number input");
-                            num = 0;
+                            continue;
                         }
                         if (num <= 0) {
                             System.out.println("number should be positive");
@@ -95,9 +104,17 @@ public class CommandParser {
                             // [user_type] [user_name]
                             String type = words[0];
                             String name = words[1];
+                            if(!type.equals("Staff")){
+                                System.out.println("Invalid input");
+                                continue;
+                            }
                             // TODO: call add user function
                             curNumInputLine++;
-                            System.out.println("add user");
+                            try {
+                                userService.AddUser(type, name, 0);
+                            } catch (Exception e) {
+                                System.out.println("Invalid input");
+                            }
                             break;
                         }
                         // add user
@@ -111,26 +128,40 @@ public class CommandParser {
                             System.out.println("Invalid number input");
                             predefinedBorrowBookNumber = 0;
                         }
-                        // TODO: call add user function
                         curNumInputLine++;
-                        System.out.println("add user");
+                        try {
+                            userService.AddUser(type, name, predefinedBorrowBookNumber);
+                        } catch (Exception e) {
+                            System.out.println("Invalid input");
+                        }
                         break;
                     }
                     case FUNCTIONS: {
                         if (words.length < 2) {
-                            System.out.println("Invalid input");
+                            System.out.println("Error");
                             continue;
                         }
                         String command = words[1];
                         switch (command) {
                             case "checkout": {
+                                // [user_name1] checkout [user_name2]
+                                if (words.length != 3) {
+                                    System.out.println("Borrower can not check out the books");
+                                    continue;
+                                }
                                 mode = Mode.FUNCTION_CALL_CHECKOUT;
-                                System.out.println("call function checkout");
+                                User1 = words[0];
+                                User2 = words[2];
                                 break;
                             }
                             case "addBook": {
+                                // [user_name1] addBook
+                                if (words.length != 2) {
+                                    System.out.println("Error");
+                                    continue;
+                                }
                                 mode = Mode.FUNCTION_CALL_ADD_BOOK;
-                                System.out.println("call function addBook");
+                                User1 = words[0];
                                 break;
                             }
                             case "removeBook": {
@@ -147,7 +178,11 @@ public class CommandParser {
                                     System.out.println("Invalid number input");
                                     continue;
                                 }
-                                System.out.println("call function removeBook");
+                                try {
+                                    librarySystem.RemoveBook(userName, bookId);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             case "return": {
@@ -164,7 +199,11 @@ public class CommandParser {
                                     System.out.println("Invalid number input");
                                     continue;
                                 }
-                                System.out.println("call function return");
+                                try {
+                                    librarySystem.Return(userName, bookId);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             case "listAuthor": {
@@ -173,9 +212,13 @@ public class CommandParser {
                                     System.out.println("Invalid input");
                                     continue;
                                 }
-                                String userName = words[0];
+//                                String userName = words[0];
                                 String author = words[2];
-                                System.out.println("call function listAuthor");
+                                try {
+                                    librarySystem.GetBooksByAuthor(author);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             case "listSubject": {
@@ -184,9 +227,13 @@ public class CommandParser {
                                     System.out.println("Invalid input");
                                     continue;
                                 }
-                                String userName = words[0];
+//                                String userName = words[0];
                                 String subject = words[2];
-                                System.out.println("call function listSubject");
+                                try {
+                                    librarySystem.GetBooksBySubject(subject);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             case "findChecked": {
@@ -197,7 +244,11 @@ public class CommandParser {
                                 }
                                 String userName = words[0];
                                 String borrowerName = words[2];
-                                System.out.println("call function findChecked");
+                                try {
+                                    librarySystem.findChecked(userName, borrowerName);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             case "Borrower": {
@@ -214,7 +265,11 @@ public class CommandParser {
                                     System.out.println("Invalid number input");
                                     continue;
                                 }
-                                System.out.println("call function Borrower");
+                                try {
+                                    librarySystem.GetBorrower(userName, bookId);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             }
                             default: {
@@ -230,29 +285,31 @@ public class CommandParser {
                             try {
                                 bookIds.add(Integer.parseInt(word));
                             } catch (NumberFormatException e) {
-                                System.out.println("Invalid number input");
+                                System.out.println("Borrower can not check out the books");
                             }
                         }
-                        // TODO: call checkout function
-                        System.out.println("checkout real add books start");
-                        // print array list
-                        for (int i = 0; i < bookIds.size(); i++) {
-                            System.out.println(bookIds.get(i));
+                        try {
+                            librarySystem.CheckOut(User1, User2, bookIds);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
                         }
-                        System.out.println("checkout real add books end");
                         // back to function mode
                         mode = Mode.FUNCTIONS;
                         break;
                     }
                     case FUNCTION_CALL_ADD_BOOK: {
                         if (words.length != 2) {
-                            System.out.println("Invalid input");
+                            System.out.println("Error");
                             continue;
                         }
                         String author = words[0];
                         String subject = words[1];
                         mode = Mode.FUNCTIONS;
-                        System.out.println("add book " + author + " " + subject);
+                        try {
+                            librarySystem.AddBook(User1, author, subject);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
                         break;
                     }
                 }
