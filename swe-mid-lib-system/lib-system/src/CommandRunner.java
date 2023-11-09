@@ -245,7 +245,7 @@ public class CommandRunner {
                                 String userName = words[0];
                                 String borrowerName = words[2];
                                 try {
-                                    librarySystem.findChecked(userName, borrowerName);
+                                    librarySystem.FindChecked(userName, borrowerName);
                                 } catch (Exception e) {
                                     System.out.println(e.getMessage());
                                 }
