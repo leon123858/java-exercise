@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CommandRunner {
     public static void run(String path) {
@@ -108,7 +107,6 @@ public class CommandRunner {
                                 System.out.println("Invalid input");
                                 continue;
                             }
-                            // TODO: call add user function
                             curNumInputLine++;
                             try {
                                 userService.AddUser(type, name, 0);
@@ -146,7 +144,7 @@ public class CommandRunner {
                             case "checkout": {
                                 // [user_name1] checkout [user_name2]
                                 if (words.length != 3) {
-                                    System.out.println("Borrower can not check out the books");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 mode = Mode.FUNCTION_CALL_CHECKOUT;
