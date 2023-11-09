@@ -1,19 +1,19 @@
 import java.util.List;
 
 public interface ILibrarySystem {
-    public void CheckOut(String staffName, String borrowerName, List<Integer> bookIds) throws Exception;
+    void CheckOut(String staffName, String borrowerName, List<Integer> bookIds) throws Exception;
 
-    public void Return(String staffName, int bookId) throws Exception;
+    void Return(String staffName, int bookId) throws Exception;
 
-    public void AddBook(String staffName, String author, String subject) throws Exception;
+    void AddBook(String staffName, String author, String subject) throws Exception;
 
-    public void RemoveBook(String staffName, int bookId) throws Exception;
+    void RemoveBook(String staffName, int bookId) throws Exception;
 
-    public void GetBooksByAuthor(String authorName);
+    void GetBooksByAuthor(String authorName);
 
-    public void GetBooksBySubject(String subjectName);
+    void GetBooksBySubject(String subjectName);
 
-    public void FindChecked(String userName, String findName) throws Exception;
+    void FindChecked(String userName, String findName) throws Exception;
 
-    public void GetBorrower(String staffName, int bookId) throws Exception;
+    void GetBorrower(String staffName, int bookId) throws Exception;
 }

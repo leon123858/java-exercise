@@ -1,9 +1,7 @@
-import java.util.UUID;
-
 public class Book {
-    private int id;
-    private String author;
-    private String subject;
+    private final int id;
+    private final String author;
+    private final String subject;
     private boolean isCheckedOut;
 
     public Book(int id, String author, String subject) {
