@@ -1,15 +1,16 @@
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class CheckOut {
     private Staff staff;
     private Borrower borrower;
     private Book book;
-    private Timestamp timestamp;
+    private LocalDateTime time;
 
-    public CheckOut(Staff staff, Borrower borrower, Book book) {
+    public CheckOut(Staff staff, Borrower borrower, Book book, LocalDateTime time) {
         this.staff = staff;
         this.borrower = borrower;
         this.book = book;
+        this.time = time;
     }
 
     public Borrower getBorrower() {
@@ -20,11 +21,11 @@ public class CheckOut {
         return book;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
     public Staff getStaff() {
         return staff;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
     }
 }

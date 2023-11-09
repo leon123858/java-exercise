@@ -1,12 +1,13 @@
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class LibrarySystem implements ILibrarySystem {
     private final UserService userService;
-    private final List<Book> bookList;
+    private final BookService bookService;
     private final List<CheckOut> checkOutList = new LinkedList<>();
 
-    public LibrarySystem(List<Book> initialBooks, UserService userService) {
-        bookList = initialBooks;
+    public LibrarySystem(BookService bookService, UserService userService) {
+        this.bookService = bookService;
         this.userService = userService;
     }
 
@@ -19,13 +20,7 @@ public class LibrarySystem implements ILibrarySystem {
 
         var borrowBooks = new LinkedList<Book>();
         for (var id : bookIds) {
-            var book = bookList.stream()
-                    .filter(b -> b.getId() == id)
-                    .findFirst()
-                    .orElse(null);
-
-            if (book == null)
-                throw new Exception("No such book");
+            var book = bookService.GetBookById(id);
 
             if (book.getStatus() == BookStatus.CheckedOut)
                 throw new Exception("Can not check out since the book is checked out");
@@ -33,20 +28,16 @@ public class LibrarySystem implements ILibrarySystem {
             borrowBooks.add(book);
         }
 
+        var borrowTime = LocalDateTime.now();
+
         for (var book : borrowBooks) {
-            var checkout = new CheckOut((Staff) staff, (Borrower) borrower, book);
+            var checkout = new CheckOut((Staff) staff, (Borrower) borrower, book, borrowTime);
             checkOutList.add(checkout);
         }
     }
 
     public void Return(String staffName, int bookId) throws Exception {
-        var book = bookList.stream()
-                .filter(b -> b.getId() == bookId)
-                .findFirst()
-                .orElse(null);
-
-        if (book == null)
-            throw new Exception("No such book");
+        var book = bookService.GetBookById(bookId);
 
         if (book.getStatus() == BookStatus.Avaliable)
             throw new Exception("Can not return since the book isn't checked out");
@@ -56,31 +47,28 @@ public class LibrarySystem implements ILibrarySystem {
     }
 
     public void AddBook(String staffName, String author, String subject) {
-        var newId = bookList.size();
-        var newBook = new Book(newId, author, subject);
-        bookList.add(newBook);
+        bookService.AddBook(author, subject);
     }
 
-    public void RemoveBook(String staffName, int bookId) {
-        bookList.removeIf(b -> (b.getId() == bookId));
+    public void RemoveBook(String staffName, int bookId) throws Exception {
+        bookService.RemoveBook(bookId);
     }
 
     public void GetBooksByAuthor(String authorName) {
-        for (var b : bookList) {
-            if (Objects.equals(b.getAuthor(), authorName))
-                System.out.println(b);
-        }
+        bookService.GetBooksByAuthor(authorName);
     }
 
     public void GetBooksBySubject(String subjectName) {
-        for (var b : bookList) {
-            if (Objects.equals(b.getSubject(), subjectName))
-                System.out.println(b);
-        }
+        bookService.GetBooksBySubject(subjectName);
     }
 
-    public void findChecked(String userName, String findName) {
+    public void findChecked(String userName, String findName) throws Exception {
+        var findUser = userService.getUserByName(findName);
 
+        for (var c : checkOutList) {
+            if (c.getBorrower().equals(findUser))
+                System.out.println(c.getBook());
+        }
     }
 
     public void GetBorrower(String staffName, int bookId) {
