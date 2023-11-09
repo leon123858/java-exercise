@@ -31,6 +31,7 @@ public class LibrarySystem implements ILibrarySystem {
         var borrowTime = LocalDateTime.now();
 
         for (var book : borrowBooks) {
+            book.checkOut();
             var checkout = new CheckOut((Borrower) borrower, book, borrowTime);
             checkOutList.add(checkout);
         }
