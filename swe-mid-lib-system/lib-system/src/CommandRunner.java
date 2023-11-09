@@ -125,7 +125,7 @@ public class CommandRunner {
                         try {
                             userService.AddUser(type, name, predefinedBorrowBookNumber);
                         } catch (Exception e) {
-                            System.out.println("Invalid input");
+                            System.out.println("Error");
                         }
                         break;
                     }
@@ -160,7 +160,7 @@ public class CommandRunner {
                             case "removeBook": {
                                 // [user_name1] removeBook [book_id]
                                 if (words.length != 3) {
-                                    System.out.println("Invalid input");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 String userName = words[0];
@@ -168,7 +168,7 @@ public class CommandRunner {
                                 try {
                                     bookId = Integer.parseInt(words[2]);
                                 } catch (NumberFormatException e) {
-                                    System.out.println("Invalid number input");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 try {
@@ -181,7 +181,7 @@ public class CommandRunner {
                             case "return": {
                                 // [user_name1] return [book_id]
                                 if (words.length != 3) {
-                                    System.out.println("Invalid input");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 String userName = words[0];
@@ -189,7 +189,7 @@ public class CommandRunner {
                                 try {
                                     bookId = Integer.parseInt(words[2]);
                                 } catch (NumberFormatException e) {
-                                    System.out.println("Invalid number input");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 try {
@@ -202,7 +202,7 @@ public class CommandRunner {
                             case "listAuthor": {
                                 // [user_name1] listAuthor [book_author]
                                 if (words.length != 3) {
-                                    System.out.println("Invalid input");
+                                    System.out.println("Error");
                                     continue;
                                 }
 //                                String userName = words[0];
@@ -217,7 +217,7 @@ public class CommandRunner {
                             case "listSubject": {
                                 // [user_name1] listSubject [book_subject]
                                 if (words.length != 3) {
-                                    System.out.println("Invalid input");
+                                    System.out.println("Error");
                                     continue;
                                 }
 //                                String userName = words[0];
@@ -232,7 +232,7 @@ public class CommandRunner {
                             case "findChecked": {
                                 // [user_name1] findChecked [user_name2]
                                 if (words.length != 3) {
-                                    System.out.println("Invalid input");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 String userName = words[0];
@@ -247,7 +247,7 @@ public class CommandRunner {
                             case "Borrower": {
                                 // [user_name1] Borrower [book_id]
                                 if (words.length != 3) {
-                                    System.out.println("Invalid input");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 String userName = words[0];
@@ -255,7 +255,7 @@ public class CommandRunner {
                                 try {
                                     bookId = Integer.parseInt(words[2]);
                                 } catch (NumberFormatException e) {
-                                    System.out.println("Invalid number input");
+                                    System.out.println("Error");
                                     continue;
                                 }
                                 try {
