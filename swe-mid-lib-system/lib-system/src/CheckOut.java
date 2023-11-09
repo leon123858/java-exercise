@@ -1,13 +1,11 @@
 import java.time.LocalDateTime;
 
 public class CheckOut {
-    private Staff staff;
-    private Borrower borrower;
-    private Book book;
-    private LocalDateTime time;
+    private final Borrower borrower;
+    private final Book book;
+    private final LocalDateTime time;
 
-    public CheckOut(Staff staff, Borrower borrower, Book book, LocalDateTime time) {
-        this.staff = staff;
+    public CheckOut(Borrower borrower, Book book, LocalDateTime time) {
         this.borrower = borrower;
         this.book = book;
         this.time = time;
@@ -19,10 +17,6 @@ public class CheckOut {
 
     public Book getBook() {
         return book;
-    }
-
-    public Staff getStaff() {
-        return staff;
     }
 
     public LocalDateTime getTime() {

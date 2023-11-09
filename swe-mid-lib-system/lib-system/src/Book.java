@@ -4,13 +4,13 @@ public class Book {
     private int id;
     private String author;
     private String subject;
-    private BookStatus status;
+    private boolean isCheckedOut;
 
     public Book(int id, String author, String subject) {
         this.id = id;
         this.author = author;
         this.subject = subject;
-        status = BookStatus.Avaliable;
+        isCheckedOut = false;
     }
 
     public int getId() {
@@ -26,11 +26,11 @@ public class Book {
     }
 
     public void checkOut() {
-        status = BookStatus.CheckedOut;
+        isCheckedOut = true;
     }
 
     public void returnBook() {
-        status = BookStatus.Avaliable;
+        isCheckedOut = false;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Book {
         return id + " Author: " + author + " Subject: " + subject;
     }
 
-    public BookStatus getStatus() {
-        return status;
+    public boolean getIsCheckedOut() {
+        return isCheckedOut;
     }
 }

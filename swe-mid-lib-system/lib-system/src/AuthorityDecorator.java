@@ -59,14 +59,14 @@ public class AuthorityDecorator extends LibrarySystemDecorator{
     }
 
     @Override
-    public void findChecked(String userName, String findName) throws Exception {
+    public void FindChecked(String userName, String findName) throws Exception {
         var user = userService.getUserByName(userName);
         var findUser = userService.getUserByName(findName);
 
         if (user instanceof Borrower && !user.getName().equals(findUser.getName()))
             throw new Exception("Borrower can not find books checked out by other users");
 
-        inner.findChecked(userName, findName);
+        inner.FindChecked(userName, findName);
     }
 
     @Override

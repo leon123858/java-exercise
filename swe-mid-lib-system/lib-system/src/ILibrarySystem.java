@@ -13,7 +13,7 @@ public interface ILibrarySystem {
 
     public void GetBooksBySubject(String subjectName);
 
-    public void findChecked(String userName, String findName) throws Exception;
+    public void FindChecked(String userName, String findName) throws Exception;
 
     public void GetBorrower(String staffName, int bookId) throws Exception;
 }

@@ -22,7 +22,7 @@ public class LibrarySystem implements ILibrarySystem {
         for (var id : bookIds) {
             var book = bookService.GetBookById(id);
 
-            if (book.getStatus() == BookStatus.CheckedOut)
+            if (book.getIsCheckedOut())
                 throw new Exception("Can not check out since the book is checked out");
 
             borrowBooks.add(book);
@@ -31,7 +31,7 @@ public class LibrarySystem implements ILibrarySystem {
         var borrowTime = LocalDateTime.now();
 
         for (var book : borrowBooks) {
-            var checkout = new CheckOut((Staff) staff, (Borrower) borrower, book, borrowTime);
+            var checkout = new CheckOut((Borrower) borrower, book, borrowTime);
             checkOutList.add(checkout);
         }
     }
@@ -39,7 +39,7 @@ public class LibrarySystem implements ILibrarySystem {
     public void Return(String staffName, int bookId) throws Exception {
         var book = bookService.GetBookById(bookId);
 
-        if (book.getStatus() == BookStatus.Avaliable)
+        if (!book.getIsCheckedOut())
             throw new Exception("Can not return since the book isn't checked out");
 
         book.returnBook();
@@ -62,7 +62,7 @@ public class LibrarySystem implements ILibrarySystem {
         bookService.GetBooksBySubject(subjectName);
     }
 
-    public void findChecked(String userName, String findName) throws Exception {
+    public void FindChecked(String userName, String findName) throws Exception {
         var findUser = userService.getUserByName(findName);
 
         for (var c : checkOutList) {
