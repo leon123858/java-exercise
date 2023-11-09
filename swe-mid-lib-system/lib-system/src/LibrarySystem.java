@@ -102,6 +102,17 @@ public class LibrarySystem implements ILibrarySystem {
                 System.out.println("User: ");
                 return;
             }
+
+            var dateTimeComparator = new Comparator<CheckOut>() {
+                @Override
+                public int compare(CheckOut checkOut1, CheckOut checkOut2) {
+                    return checkOut1.getTime().compareTo(checkOut2.getTime());
+                }
+            };
+
+            history.sort(dateTimeComparator);
+
+            System.out.println("User: " + history.get(history.size() - 1).getBorrower().getName());
         }
     }
 
