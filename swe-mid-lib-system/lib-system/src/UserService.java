@@ -6,12 +6,12 @@ public class UserService {
 
     public void AddUser(String type, String name, int borrowLimit) throws Exception {
         if (userMap.containsKey(name))
-            throw new Exception("User " + name + "already exist.");
+            throw new Exception("Error");
 
         var newUser = switch (type) {
             case "Staff" -> new Staff(name);
             case "Borrower" -> new Borrower(name, borrowLimit);
-            default -> throw new Exception(type + " not exist.");
+            default -> throw new Exception("Error");
         };
 
         userMap.put(name, newUser);
@@ -21,7 +21,7 @@ public class UserService {
         var targetUser = userMap.getOrDefault(name, null);
 
         if (targetUser == null)
-            throw new Exception("No such user.");
+            throw new Exception("Error");
 
         return targetUser;
     }
