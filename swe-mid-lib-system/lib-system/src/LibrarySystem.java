@@ -66,9 +66,18 @@ public class LibrarySystem implements ILibrarySystem {
     public void FindChecked(String userName, String findName) throws Exception {
         var findUser = userService.getUserByName(findName);
 
+        var borrowedBook = new LinkedList<Book>();
+
         for (var c : checkOutList) {
             if (c.getBorrower().equals(findUser))
-                System.out.println(c.getBook());
+                borrowedBook.add(c.getBook());
+        }
+
+        var idComparator = Comparator.comparingInt(Book::getId);
+        borrowedBook.sort(idComparator);
+
+        for (var b : borrowedBook) {
+            System.out.println(b);
         }
     }
 

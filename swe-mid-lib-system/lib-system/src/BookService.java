@@ -20,6 +20,9 @@ public class BookService {
         if (book == null)
             throw new Exception("No such book");
 
+        if (book.getIsCheckedOut())
+            throw new Exception("Error");
+
         bookList.removeIf(b -> (b.getId() == bookId));
     }
 
