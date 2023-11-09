@@ -46,8 +46,14 @@ public class LibrarySystem implements ILibrarySystem {
         if (!book.getIsCheckedOut())
             throw new Exception("Can not return since the book isn't checked out");
 
+        var checkout = checkOutList.stream()
+                .filter(c -> c.getBook().equals(book))
+                .findFirst()
+                .orElse(null);
+
         book.returnBook();
-        checkOutList.removeIf(c -> c.getBook().equals(book));
+        checkOutHistory.add(checkout);
+        checkOutList.remove(checkout);
     }
 
     public void AddBook(String staffName, String author, String subject) {
