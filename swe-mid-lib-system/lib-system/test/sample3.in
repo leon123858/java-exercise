@@ -1,0 +1,12 @@
+3
+AuthorA SubjectA
+AuthorB SubjectB
+AuthorC SubjectC
+2
+Staff UserA
+Borrower UserB 2
+UserB addBook
+AuthorD SubjectD
+UserA addBook
+AuthorA SubjectA
+UserA listSubject SubjectA
