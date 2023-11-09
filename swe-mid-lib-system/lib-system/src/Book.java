@@ -35,7 +35,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return id + " Author: " + author + " Subject: " + subject;
+        return "ID: " + id + " Author: " + author + " Subject: " + subject;
     }
 
     public boolean getIsCheckedOut() {
