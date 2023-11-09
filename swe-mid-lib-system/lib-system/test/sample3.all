@@ -1,0 +1,13 @@
+# 非法與合法 addBook
+3
+AuthorA SubjectA
+AuthorB SubjectB
+AuthorC SubjectC
+2
+Staff UserA
+Borrower UserB 2
+UserB addBook
+AuthorD SubjectD # Error
+UserA addBook
+AuthorA SubjectA
+UserA listSubject SubjectA # ID: 1 Author: AuthorA Subject: SubjectA\nID: 4 Author: AuthorA Subject: SubjectA

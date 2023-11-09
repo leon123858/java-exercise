@@ -25,77 +25,74 @@ public class CommandRunner {
                 }
                 String[] words = line.split(" ");
                 if (words.length == 0) {
-                    System.out.println("Empty line");
+                    System.out.println("Error");
                 }
                 switch (mode) {
                     case BOOKS_INIT: {
                         if (words.length != 1) {
-                            System.out.println("Invalid input");
-                            continue;
+                            System.out.println("Error");
+                            System.exit(1);
                         }
                         // parse number of it
-                        int num;
+                        int num = 0;
                         try {
                             num = Integer.parseInt(words[0]);
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid number input");
-                            continue;
+                            System.out.println("Error");
+                            System.exit(1);
                         }
                         if (num <= 0) {
-                            System.out.println("number should be positive");
-                            num = 0;
+                            System.out.println("Error");
+                            System.exit(1);
                         }
-                        if (num > 0) {
-                            numInputLine = num;
-                            curNumInputLine = 0;
-                            mode = Mode.BOOKS;
-                        }
+                        numInputLine = num;
+                        curNumInputLine = 0;
+                        mode = Mode.BOOKS;
                         break;
                     }
                     case BOOKS: {
+                        curNumInputLine++;
                         if (words.length != 2) {
-                            System.out.println("Invalid input");
+                            System.out.println("Error");
                             continue;
                         }
                         // add book
                         // [author] [subject]
                         String author = words[0];
                         String subject = words[1];
-                        curNumInputLine++;
                         try {
                             bookService.AddBook(author, subject);
                         } catch (Exception e) {
-                            System.out.println("Invalid input");
+                            System.out.println("Error");
                         }
                         break;
                     }
                     case USERS_INIT: {
                         if (words.length != 1) {
-                            System.out.println("Invalid input");
-                            continue;
+                            System.out.println("Error");
+                            System.exit(1);
                         }
                         // parse number of it
-                        int num;
+                        int num = 0;
                         try {
                             num = Integer.parseInt(words[0]);
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid number input");
-                            continue;
+                            System.out.println("Error");
+                            System.exit(1);
                         }
                         if (num <= 0) {
-                            System.out.println("number should be positive");
-                            num = 0;
+                            System.out.println("Error");
+                            System.exit(1);
                         }
-                        if (num > 0) {
-                            numInputLine = num;
-                            curNumInputLine = 0;
-                            mode = Mode.USERS;
-                        }
+                        numInputLine = num;
+                        curNumInputLine = 0;
+                        mode = Mode.USERS;
                         break;
                     }
                     case USERS: {
+                        curNumInputLine++;
                         if (words.length != 3 && words.length != 2) {
-                            System.out.println("Invalid input");
+                            System.out.println("Error");
                             continue;
                         }
                         if (words.length == 2) {
@@ -103,15 +100,14 @@ public class CommandRunner {
                             // [user_type] [user_name]
                             String type = words[0];
                             String name = words[1];
-                            if(!type.equals("Staff")){
-                                System.out.println("Invalid input");
+                            if (!type.equals("Staff")) {
+                                System.out.println("Error");
                                 continue;
                             }
-                            curNumInputLine++;
                             try {
                                 userService.AddUser(type, name, 0);
                             } catch (Exception e) {
-                                System.out.println("Invalid input");
+                                System.out.println("Error");
                             }
                             break;
                         }
@@ -123,10 +119,9 @@ public class CommandRunner {
                         try {
                             predefinedBorrowBookNumber = Integer.parseInt(words[2]);
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid number input");
-                            predefinedBorrowBookNumber = 0;
+                            System.out.println("Error");
+                            continue;
                         }
-                        curNumInputLine++;
                         try {
                             userService.AddUser(type, name, predefinedBorrowBookNumber);
                         } catch (Exception e) {

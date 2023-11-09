@@ -1,0 +1,19 @@
+# 各種合法 addBook、listSubject
+3
+AuthorA SubjectA #1
+AuthorB SubjectB #2
+AuthorC SubjectC #3
+2
+Staff UserA
+Borrower UserB 2
+UserA listSubject SubjectB # ID: 2 Author: AuthorB Subject: SubjectB
+UserA listSubject SubjectD # Error
+UserA addBook
+AuthorD SubjectD # 4
+UserA listSubject SubjectD # ID: 4 Author: AuthorD Subject: SubjectD
+UserA addBook
+AuthorA SubjectE # 5
+UserA listSubject SubjectE # ID: 5 Author: AuthorA Subject: SubjectE
+UserA addBook
+AuthorK subjectA #6
+UserA listSubject SubjectA # ID: 1 Author: AuthorA Subject: SubjectA\nID: 6 Author: AuthorK Subject: SubjectA
