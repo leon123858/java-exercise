@@ -1,8 +1,8 @@
 package widget;
 
-public class PM implements WidgetStyle{
+public class PM implements WidgetStyle {
     @Override
     public String getStyle() {
-        return null;
+        return "PM";
     }
 }

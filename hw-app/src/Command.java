@@ -5,13 +5,14 @@ public class Command {
     public String widgets_type;
     public String widgets_name;
     public String widgets_style;
-    public Command(String str){
+
+    public Command(String str) {
         // split str into array of strings
         var arr = str.split(" ");
-        if(arr.length > 2 || arr.length < 1 ){
+        if (arr.length > 2 || arr.length < 1) {
             throw new IllegalArgumentException("wrong number arguments");
         }
-        if(arr.length == 2){
+        if (arr.length == 2) {
             // create
             command_type = type.CREATE;
             widgets_type = arr[0];
@@ -19,7 +20,7 @@ public class Command {
             return;
         }
         String tmp = arr[0];
-        if (Objects.equals(tmp, "Present")){
+        if (Objects.equals(tmp, "Present")) {
             command_type = type.PRESENT;
             return;
         }
@@ -28,14 +29,8 @@ public class Command {
         widgets_style = arr[0];
     }
 
-    public enum type {
-        CREATE,
-        STYLE,
-        PRESENT
-    }
-
-    public void execute(VM vm){
-        switch(command_type){
+    public void execute(VM vm) {
+        switch (command_type) {
             case CREATE:
                 vm.create(widgets_type, widgets_name);
                 break;
@@ -46,5 +41,11 @@ public class Command {
                 vm.present();
                 break;
         }
+    }
+
+    public enum type {
+        CREATE,
+        STYLE,
+        PRESENT
     }
 }

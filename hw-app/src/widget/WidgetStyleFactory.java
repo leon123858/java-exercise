@@ -1,6 +1,6 @@
 package widget;
 
-public class WidgetStyleFactory extends AbstractFactory{
+public class WidgetStyleFactory extends AbstractFactory {
 
     @Override
     public WidgetStyle createWidgetStyle(String style) {
