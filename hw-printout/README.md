@@ -64,3 +64,35 @@ Comment:
         List
         SkipList
 ```
+
+## design
+
+use iterator pattern to traverse the data structure
+
+![img.png](img.png)
+
+```mermaid
+classDiagram
+direction BT
+class CustomIterator {
+<<Interface>>
+
+}
+class CustomIteratorImp
+class CustomIteratorImp
+class CustomList {
+<<Interface>>
+
+}
+class CustomListImp
+class SkipListImp
+
+CustomIteratorImp  ..>  CustomIterator 
+CustomIteratorImp  ..>  CustomIterator 
+CustomListImp  -->  CustomIteratorImp 
+SkipListImp  -->  CustomIteratorImp 
+CustomListImp  ..>  CustomIteratorImp : «create»
+CustomListImp  ..>  CustomList
+SkipListImp  ..>  CustomIteratorImp : «create»
+SkipListImp  ..>  CustomList
+```

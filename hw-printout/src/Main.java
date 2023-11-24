@@ -50,7 +50,6 @@ public class Main {
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            return;
         }
     }
 
@@ -59,8 +58,9 @@ public class Main {
             case "List":
                 dataStructures.put(name, new CustomListImp(name));
                 break;
-            case "List1":
-                throw new UnsupportedOperationException("Not supported yet.");
+            case "SkipList":
+                dataStructures.put(name, new SkipListImp(name));
+                break;
             default:
                 throw new InvalidParameterException("Not exist type.");
         }
@@ -75,46 +75,68 @@ public class Main {
         }
     }
 
-    private static void getLength(String name, Map<String, List<String>> dataStructures) {
-        List<String> dataList = dataStructures.get(name);
+    private static void getLength(String name, HashMap<String, CustomList> dataStructures) {
+        CustomList dataList = dataStructures.get(name);
         if (dataList != null) {
-            System.out.println(name + " length: " + dataList.size());
+            try {
+                System.out.println(dataList.length());
+            } catch (UnsupportedOperationException e) {
+                System.out.println("SkipList can not access length");
+            }
         } else {
             System.out.println(name + " does not exist.");
         }
     }
 
-    private static void getSize(String name, Map<String, List<String>> dataStructures) {
-        List<String> dataList = dataStructures.get(name);
+    private static void getSize(String name, HashMap<String, CustomList> dataStructures) {
+        CustomList dataList = dataStructures.get(name);
         if (dataList != null) {
-            System.out.println(name + " size: " + dataList.size());
+            try {
+                System.out.println(dataList.size());
+            } catch (UnsupportedOperationException e) {
+                System.out.println("List do not have method size");
+            }
         } else {
             System.out.println(name + " does not exist.");
         }
     }
 
-    private static void getIndexValue(String name, int index, Map<String, List<String>> dataStructures) {
-        List<String> dataList = dataStructures.get(name);
-        if (dataList != null && index >= 0 && index < dataList.size()) {
-            System.out.println(name + "[" + index + "]: " + dataList.get(index));
-        } else {
-            System.out.println("Invalid index or " + name + " does not exist.");
+    private static void getIndexValue(String name, int index, HashMap<String, CustomList> dataStructures) {
+        CustomList dataList = dataStructures.get(name);
+        try {
+            if (dataList != null) {
+                System.out.println(dataList.get(index));
+            } else {
+                throw new IndexOutOfBoundsException("Invalid index or " + name + " does not exist.");
+            }
+        } catch (UnsupportedOperationException e) {
+            System.out.println("SkipList do not have method get");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    private static void getNode(String name, int index, Map<String, List<String>> dataStructures) {
-        List<String> dataList = dataStructures.get(name);
-        if (dataList != null && index >= 0 && index < dataList.size()) {
-            System.out.println("Node at index " + index + " in " + name + ": " + dataList.get(index));
-        } else {
-            System.out.println("Invalid index or " + name + " does not exist.");
+    private static void getNode(String name, int index, HashMap<String, CustomList> dataStructures) {
+        CustomList dataList = dataStructures.get(name);
+        try {
+            if (dataList != null) {
+                System.out.println(dataList.getNode(index));
+            } else {
+                throw new IndexOutOfBoundsException("Invalid index or " + name + " does not exist.");
+            }
+        } catch (UnsupportedOperationException e) {
+            System.out.println("List do not have method getNode");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    private static void printList(String name, Map<String, List<String>> dataStructures) {
-        List<String> dataList = dataStructures.get(name);
+    private static void printList(String name, HashMap<String, CustomList> dataStructures) {
+        CustomList dataList = dataStructures.get(name);
         if (dataList != null) {
-            System.out.println(name + " contents: " + dataList);
+            for (CustomIterator iterator = dataList.iterator(); iterator.hasNext();) {
+                System.out.println(iterator.next());
+            }
         } else {
             System.out.println(name + " does not exist.");
         }
