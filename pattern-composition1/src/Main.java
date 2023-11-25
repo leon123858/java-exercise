@@ -1,8 +1,9 @@
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class Main {
             // Get the root element
             Element rootElement = document.getDocumentElement();
             var nodeList = rootElement.getChildNodes();
-            var root = new Component("Root");
+            IComponent root = new Component("Root");
             for (int i = 0; i < nodeList.getLength(); i++) {
                 var node = nodeList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -30,7 +31,7 @@ public class Main {
                 }
             }
             // Print
-            for (Component child : root.getChildren()) {
+            for (IComponent child : root.getChildren()) {
                 child.dfs();
                 System.out.println();
             }
@@ -39,10 +40,11 @@ public class Main {
         }
     }
 
-    private static Component dfs(Node rootNode) {
+    private static IComponent dfs(Node rootNode) {
         var type = rootNode.getNodeName();
-        var cur = new Component(type);
+        IComponent cur;
         if (type.equals("Group")) {
+            cur = new Component(type);
             var nodeList = rootNode.getChildNodes();
             for (int i = 0; i < nodeList.getLength(); i++) {
                 var node = nodeList.item(i);
@@ -50,8 +52,8 @@ public class Main {
                     cur.add(dfs(node));
                 }
             }
-        }else{
-            cur.add(new Component(type));
+        } else {
+            cur = new Leaf(type);
         }
         return cur;
     }
