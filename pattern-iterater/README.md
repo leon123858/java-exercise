@@ -69,7 +69,7 @@ Comment:
 
 use iterator pattern to traverse the data structure
 
-![img.png](img.png)
+![img_1.png](img_1.png)
 
 ```mermaid
 classDiagram
