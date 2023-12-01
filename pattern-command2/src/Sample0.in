@@ -1,0 +1,6 @@
+AssignmentNode(x, 10)
+AssignmentNode(y, VariableRefNode(x))
+checkType 0
+generateCode 0
+generateCode 1
+print 1

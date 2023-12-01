@@ -1,0 +1,4 @@
+AssignmentNode
+x = 10
+y = x
+AssignmentNode(y, VariableRefNode(x))
