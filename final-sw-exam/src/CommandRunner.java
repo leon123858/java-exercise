@@ -85,9 +85,7 @@ public class CommandRunner {
 //                                System.out.println(assignmentFiles.studentID);
 //                                System.out.println(assignmentFiles.reviewers);
 //                                System.out.println(assignmentFiles.files);
-                                for(ScoreFiles scoreFiles : assignmentFiles.getScoreList()) {
-                                    peerReviewSystem.Assignment(assignmentFiles.ID, assignmentFiles.studentID, assignmentFiles);
-                                }
+                                peerReviewSystem.Assignment(assignmentFiles.ID, assignmentFiles.studentID, assignmentFiles);
                                 // do something with assignment
                                 break;
                             }
