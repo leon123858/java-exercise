@@ -22,6 +22,9 @@ each test has its own purpose
     - IO exception -> error
 - test 5
   - if error happen before peer review -> error, end
+- test 6
+  - requirement: assignment errors
+  - base on sample1
 
 ## Naming Convention
 
