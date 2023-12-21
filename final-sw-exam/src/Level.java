@@ -2,7 +2,7 @@ public class Level {
     private final String name;
     private final double score;
 
-    public Level(String name, int score) {
+    public Level(String name, double score) {
         this.name = name;
         this.score = score;
     }
