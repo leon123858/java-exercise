@@ -21,6 +21,7 @@ each test has its own purpose
     - duplicate criterion -> error
     - IO exception -> error
 - test 5
+  - if error happen before peer review -> error, end
 
 ## Naming Convention
 
