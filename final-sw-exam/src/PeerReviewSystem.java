@@ -7,6 +7,7 @@ public class PeerReviewSystem {
     private final List<Student> students;
     private final Map<String, Assignment> assignments;
     private final List<DoAssignment> doAssignments;
+    private Handler handler;
 
     public PeerReviewSystem()
     {
@@ -24,6 +25,12 @@ public class PeerReviewSystem {
         students = new LinkedList<>();
         assignments = new HashMap<>();
         doAssignments = new LinkedList<>();
+
+        var limitNumberHandler = new LimitNumberHandler(reviewerMin, reviewerMax);
+        var sameStudentHandler = new SameStudentHandler();
+        limitNumberHandler.setNext(sameStudentHandler);
+
+        handler = limitNumberHandler;
     }
 
     public void AddStudent(Student student) {
@@ -67,10 +74,7 @@ public class PeerReviewSystem {
     }
 
     public void Assignment(String assignmentId, String studentId, AssignmentFiles assignmentFiles) throws Exception {
-        if (assignmentFiles.getScoreList().size() < reviewerMin || assignmentFiles.getScoreList().size() > reviewerMax) {
-            System.out.printf("Assignment should be reviewed by %s-%s students.\n", reviewerMin, reviewerMax);
-            return;
-        }
+        handler.handleRequest(assignmentFiles);
 
         var assignment = assignments.get(assignmentId);
         var student = students.stream().filter(s -> Objects.equals(s.getId(), studentId)).findFirst().get();
@@ -83,11 +87,6 @@ public class PeerReviewSystem {
         var scoreFiles = assignmentFiles.getScoreList();
         for (var scoreFile : scoreFiles) {
             var reviewer = students.stream().filter(s -> Objects.equals(s.getId(), scoreFile.reviewerId)).findFirst().get();
-
-            if (reviewer.equals(student)) {
-                System.out.println("Cannot review one’s own assignment.");
-                return;
-            }
 
             var criterionList = assignment.getRubric().getCriteria();
 
