@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,5 +11,9 @@ public class LevelMapDescription {
 
     public String get(String level) {
         return map.get(level);
+    }
+
+    public ArrayList<String> getLevels() {
+        return new ArrayList<>(map.keySet());
     }
 }
