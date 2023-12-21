@@ -94,22 +94,62 @@ public class PeerReviewSystem {
         var assignment = assignments.get(assignmentId);
         var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().getId().equals(studentId)).findFirst().get();
         var ranks = doAssignment.getRanks();
-
+        var criterions = assignment.getRubric().getCriteria();
 
         var totalScore = 0.0;
-        for (var criterion : assignment.getRubric().getCriteria()) {
+        for (var criterion : criterions) {
             var criterionRanks = ranks.stream().filter(r -> r.getCriterion().equals(criterion)).toList();
             var score = strategy.calculate(criterionRanks);
 
             totalScore += score;
         }
 
-
+        System.out.printf("Assignment: %s, Student: %s, Score: %.1f\n", assignmentId, studentId, totalScore / criterions.size());
     }
 
     public void findStrength(String assignmentId, String studentId, String rankingStrategy) {
+        var strategy = RankingStrategyFactory.create(rankingStrategy);
+
+        var assignment = assignments.get(assignmentId);
+        var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().getId().equals(studentId)).findFirst().get();
+        var ranks = doAssignment.getRanks();
+        var criterions = assignment.getRubric().getCriteria();
+
+        var criterionScoreMap = new HashMap<Criterion, Double>();
+
+        for (var criterion : criterions) {
+            var criterionRanks = ranks.stream().filter(r -> r.getCriterion().equals(criterion)).toList();
+            var score = strategy.calculate(criterionRanks);
+
+            criterionScoreMap.put(criterion, score);
+        }
+
+        var maxScore = criterionScoreMap.values().stream().max(Double::compareTo).get();
+        var maxScoreCriteria = criterionScoreMap.entrySet().stream().filter(e -> e.getValue().equals(maxScore)).map(e -> e.getKey().getName()).toList();
+
+        System.out.printf("Assignment: %s, Student: %s, Strength: %s\n", assignmentId, studentId, String.join(" ", maxScoreCriteria));
     }
 
     public void findWeakness(String assignmentId, String studentId, String rankingStrategy) {
+        var strategy = RankingStrategyFactory.create(rankingStrategy);
+
+        var assignment = assignments.get(assignmentId);
+        var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().getId().equals(studentId)).findFirst().get();
+        var ranks = doAssignment.getRanks();
+        var criterions = assignment.getRubric().getCriteria();
+
+        var criterionScoreMap = new HashMap<Criterion, Double>();
+
+        for (var criterion : criterions) {
+            var criterionRanks = ranks.stream().filter(r -> r.getCriterion().equals(criterion)).toList();
+            var score = strategy.calculate(criterionRanks);
+
+            criterionScoreMap.put(criterion, score);
+        }
+
+        var minScore = criterionScoreMap.values().stream().min(Double::compareTo).get();
+        var minScoreCriteria = criterionScoreMap.entrySet().stream().filter(e -> e.getValue().equals(minScore)).map(e -> e.getKey().getName()).toList();
+
+        System.out.printf("Assignment: %s, Student: %s, Weakness: %s\n", assignmentId, studentId, String.join(" ", minScoreCriteria));
     }
 }
