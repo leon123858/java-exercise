@@ -25,9 +25,11 @@ public class PeerReviewSystem {
         var descriptionList = new LinkedList<RubricDescription>();
 
         var criterionList = criteriaFiles.getCriteriaList();
+        var criteria = new LinkedList<Criterion>();
 
         for (var criterionString : criterionList) {
             var criterion = new Criterion(criterionString);
+            criteria.add(criterion);
             var levelMap = criteriaFiles.get(criterionString);
 
             for (var level : levels) {
@@ -37,7 +39,7 @@ public class PeerReviewSystem {
             }
         }
 
-        var rubric = new Rubric(descriptionList);
+        var rubric = new Rubric(descriptionList, criteria);
         var newAssignment = new Assignment(assignmentId, rubric);
         assignments.put(assignmentId, newAssignment);
 
@@ -135,7 +137,7 @@ public class PeerReviewSystem {
             }
         }
 
-        System.out.printf("Assignment: %s, Student: %s, Strength:%s", assignmentId, studentId, criterionString);
+        System.out.printf("Assignment: %s, Student: %s, Strength:%s\n", assignmentId, studentId, criterionString);
     }
 
     public void findWeakness(String assignmentId, String studentId, String rankingStrategy) {
@@ -164,6 +166,6 @@ public class PeerReviewSystem {
             }
         }
 
-        System.out.printf("Assignment: %s, Student: %s, Weakness:%s", assignmentId, studentId, criterionString);
+        System.out.printf("Assignment: %s, Student: %s, Weakness:%s\n", assignmentId, studentId, criterionString);
     }
 }
