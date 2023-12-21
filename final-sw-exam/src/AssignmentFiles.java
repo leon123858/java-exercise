@@ -14,6 +14,11 @@ public class AssignmentFiles {
         this.list = new ArrayList<>();
         this.ID = ID;
         this.studentID = studentID;
+        // Assignment should be reviewed by 3-5 students.
+        if(reviewers.size() < 3 || reviewers.size() > 5) {
+            System.out.println("Assignment should be reviewed by 3-5 students.");
+            return;
+        }
         for(int i = 0; i < reviewers.size(); i++) {
             ScoreFiles scoreFiles = new ScoreFiles();
             scoreFiles.reviewerId = reviewers.get(i);
