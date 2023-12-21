@@ -1,15 +1,34 @@
-public class Rubric {
-    private Level level;
-    private Criterion criterion;
-    private String description;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
-    public Rubric(Level level, Criterion criterion, String description) {
-        this.level = level;
-        this.criterion = criterion;
-        this.description = description;
+public class Rubric {
+    private List<RubricDescription> descriptions;
+
+    public Rubric() {
     }
 
-    public Level getLevel() { return level; }
-    public Criterion getCriterion() { return criterion; }
-    public String getDescription() { return description; }
+    public List<RubricDescription> getDescriptions() {
+        return descriptions;
+    }
+
+    public List<Criterion> getCriteria() {
+        var criteria = new HashSet<Criterion>();
+
+        for (var rubric : descriptions) {
+            criteria.add(rubric.getCriterion());
+        }
+
+        return new LinkedList<>(criteria);
+    }
+
+    public List<Level> getLevels() {
+        var levels = new HashSet<Level>();
+
+        for (var rubric : descriptions) {
+            levels.add(rubric.getLevel());
+        }
+
+        return new LinkedList<>(levels);
+    }
 }

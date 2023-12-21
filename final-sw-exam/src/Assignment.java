@@ -1,12 +1,12 @@
 public class Assignment {
     private final String id;
-    private final RankingCriterion rankingCriterion;
+    private final Rubric rankingCriterion;
 
-    public Assignment(String id, RankingCriterion rankingCriterion) {
+    public Assignment(String id, Rubric rankingCriterion) {
         this.id = id;
         this.rankingCriterion = rankingCriterion;
     }
 
     public String getId() { return id; }
-    public RankingCriterion getRankingCriterion() { return rankingCriterion; }
+    public Rubric getRankingCriterion() { return rankingCriterion; }
 }

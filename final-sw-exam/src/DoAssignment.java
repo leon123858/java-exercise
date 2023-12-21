@@ -1,7 +1,30 @@
+import java.util.LinkedList;
 import java.util.List;
 
 public class DoAssignment {
-    private Student student;
-    private Assignment assignment;
-    private List<Rank> ranks;
+    private final Student student;
+    private final Assignment assignment;
+    private final List<Rank> ranks;
+
+    public DoAssignment(Student student, Assignment assignment) {
+        this.student = student;
+        this.assignment = assignment;
+        this.ranks = new LinkedList<>();
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public List<Rank> getRanks() {
+        return ranks;
+    }
+
+    public void addRank(Rank rank) {
+        ranks.add(rank);
+    }
 }
