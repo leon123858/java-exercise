@@ -85,7 +85,7 @@ public class PeerReviewSystem {
             var reviewer = students.stream().filter(s -> Objects.equals(s.getId(), scoreFile.reviewerId)).findFirst().get();
 
             if (reviewer.equals(student)) {
-                throw new Exception("Student cannot review their own assignment");
+                System.out.println("Cannot review one’s own assignment.");
             }
 
             var criterionList = assignment.getRubric().getCriteria();
