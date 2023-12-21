@@ -4,7 +4,7 @@ public class Main {
             System.out.println("Error");
             return;
         }
-//      String inputFilePath = args[0];
-//      CommandRunner.run(inputFilePath);
+        String inputFilePath = args[0];
+        CommandRunner.run(inputFilePath);
     }
 }
