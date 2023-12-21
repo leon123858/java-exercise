@@ -9,8 +9,6 @@ public class CommandRunner {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             Status mode = Status.BEFORE;
-            int studentNumber = 0;
-            int assignmentNumber = 0;
             while ((line = br.readLine()) != null) {
                 String[] words = line.split(" ");
                 if (words.length == 0) {
@@ -31,7 +29,6 @@ public class CommandRunner {
                                 for (int i = 1; i < words.length; i++) {
                                     String studentID = words[i];
                                     studentIDs.add(studentID);
-                                    studentNumber++;
                                 }
                                 // do something with studentIDs
                                 System.out.println(studentIDs);
@@ -54,7 +51,6 @@ public class CommandRunner {
                                 System.out.println(Levels);
                                 System.out.println(Scores);
                                 // set status
-                                assignmentNumber = studentNumber;
                                 mode = Status.ING;
                                 break;
                             }
@@ -78,8 +74,9 @@ public class CommandRunner {
                                 String assignmentID = words[1];
                                 String rubricFile = words[2];
                                 // do something with assignmentID and rubricFile
-                                System.out.println(assignmentID);
-                                System.out.println(rubricFile);
+                                CriteriaFiles criteriaFiles = new CriteriaFiles(assignmentID, rubricFile);
+                                System.out.println(criteriaFiles.assignmentId);
+                                System.out.println(criteriaFiles.getCriteriaList());
                                 break;
                             }
                             case "assignment": {
@@ -104,19 +101,19 @@ public class CommandRunner {
                                 System.out.println(assignmentFiles.studentID);
                                 System.out.println(assignmentFiles.reviewers);
                                 System.out.println(assignmentFiles.files);
-                                // check status
-                                assignmentNumber--;
-                                if (assignmentNumber == -1) {
-                                    mode = Status.AFTER;
-                                }
                                 break;
                             }
                             default: {
-                                System.out.println("Error");
-                                continue;
+                                mode = Status.AFTER;
+                                if (words.length < 2) {
+                                    System.out.println("Error");
+                                    continue;
+                                }
+                                getFunc(words);
+                                break;
                             }
                         }
-                        break;
+                        continue;
                     }
                     //printRubric [AssignmentID]
                     //averageCriterion [AssignmentID]
@@ -128,77 +125,80 @@ public class CommandRunner {
                             System.out.println("Error");
                             continue;
                         }
-                        switch (words[0]) {
-                            case "printRubric": {
-                                // parse printRubric
-                                String assignmentID = words[1];
-                                // do something with assignmentID
-                                System.out.println(assignmentID);
-                                break;
-                            }
-                            case "averageCriterion": {
-                                // parse averageCriterion
-                                String assignmentID = words[1];
-                                // do something with assignmentID
-                                System.out.println(assignmentID);
-                                break;
-                            }
-                            case "calculateScore": {
-                                if (words.length != 4) {
-                                    System.out.println("Error");
-                                    continue;
-                                }
-                                // parse calculateScore
-                                String assignmentID = words[1];
-                                String studentID = words[2];
-                                String rankingStrategy = words[3];
-                                // do something with assignmentID, studentID and rankingStrategy
-                                System.out.println(assignmentID);
-                                System.out.println(studentID);
-                                System.out.println(rankingStrategy);
-                                break;
-                            }
-                            case "findStrength": {
-                                if (words.length != 4) {
-                                    System.out.println("Error");
-                                    continue;
-                                }
-                                // parse findStrength
-                                String assignmentID = words[1];
-                                String studentID = words[2];
-                                String rankingStrategy = words[3];
-                                // do something with assignmentID, studentID and rankingStrategy
-                                System.out.println(assignmentID);
-                                System.out.println(studentID);
-                                System.out.println(rankingStrategy);
-                                break;
-                            }
-                            case "findWeakness": {
-                                if (words.length != 4) {
-                                    System.out.println("Error");
-                                    continue;
-                                }
-                                // parse findWeakness
-                                String assignmentID = words[1];
-                                String studentID = words[2];
-                                String rankingStrategy = words[3];
-                                // do something with assignmentID, studentID and rankingStrategy
-                                System.out.println(assignmentID);
-                                System.out.println(studentID);
-                                System.out.println(rankingStrategy);
-                                break;
-                            }
-                            default: {
-                                System.out.println("Error");
-                                continue;
-                            }
-                        }
+                        getFunc(words);
                         break;
                     }
                 }
             }
         } catch (IOException e) {
             System.out.println("Error");
+        }
+    }
+
+    private static void getFunc(String[] words){
+        switch (words[0]) {
+            case "printRubric": {
+                // parse printRubric
+                String assignmentID = words[1];
+                // do something with assignmentID
+                System.out.println(assignmentID);
+                break;
+            }
+            case "averageCriterion": {
+                // parse averageCriterion
+                String assignmentID = words[1];
+                // do something with assignmentID
+                System.out.println(assignmentID);
+                break;
+            }
+            case "calculateScore": {
+                if (words.length != 4) {
+                    System.out.println("Error");
+                    return;
+                }
+                // parse calculateScore
+                String assignmentID = words[1];
+                String studentID = words[2];
+                String rankingStrategy = words[3];
+                // do something with assignmentID, studentID and rankingStrategy
+                System.out.println(assignmentID);
+                System.out.println(studentID);
+                System.out.println(rankingStrategy);
+                break;
+            }
+            case "findStrength": {
+                if (words.length != 4) {
+                    System.out.println("Error");
+                    return;
+                }
+                // parse findStrength
+                String assignmentID = words[1];
+                String studentID = words[2];
+                String rankingStrategy = words[3];
+                // do something with assignmentID, studentID and rankingStrategy
+                System.out.println(assignmentID);
+                System.out.println(studentID);
+                System.out.println(rankingStrategy);
+                break;
+            }
+            case "findWeakness": {
+                if (words.length != 4) {
+                    System.out.println("Error");
+                    return;
+                }
+                // parse findWeakness
+                String assignmentID = words[1];
+                String studentID = words[2];
+                String rankingStrategy = words[3];
+                // do something with assignmentID, studentID and rankingStrategy
+                System.out.println(assignmentID);
+                System.out.println(studentID);
+                System.out.println(rankingStrategy);
+                break;
+            }
+            default: {
+                System.out.println("Error");
+            }
         }
     }
 

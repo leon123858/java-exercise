@@ -5,4 +5,9 @@ public class AssignmentFiles {
     public String studentID;
     public ArrayList<String> reviewers;
     public ArrayList<String> files;
+
+    public AssignmentFiles() {
+    }
+
+
 }
