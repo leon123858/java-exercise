@@ -1,4 +1,4 @@
 public interface Handler {
     void setNext(Handler handler);
-    void handleRequest(AssignmentFiles files) throws Exception;
+    boolean handleRequest(AssignmentFiles files) throws Exception;
 }

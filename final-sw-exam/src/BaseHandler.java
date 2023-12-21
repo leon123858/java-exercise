@@ -11,9 +11,11 @@ public class BaseHandler implements Handler {
     }
 
     @Override
-    public void handleRequest(AssignmentFiles files) throws Exception {
+    public boolean handleRequest(AssignmentFiles files) throws Exception {
         if (this.nextHandler != null) {
-            this.nextHandler.handleRequest(files);
+            return this.nextHandler.handleRequest(files);
         }
+
+        return true;
     }
 }

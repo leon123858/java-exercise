@@ -12,13 +12,14 @@ private final int reviewerMin;
     }
 
     @Override
-    public void handleRequest(AssignmentFiles files) throws Exception {
+    public boolean handleRequest(AssignmentFiles files) throws Exception {
         var scores = files.getScoreList();
 
         if (scores.size() < reviewerMin || scores.size() > reviewerMax) {
             System.out.printf("Assignment should be reviewed by %s-%s students.\n", reviewerMin, reviewerMax);
+            return false;
         }
 
-        super.handleRequest(files);
+        return super.handleRequest(files);
     }
 }

@@ -66,7 +66,11 @@ public class PeerReviewSystem {
     }
 
     public void Assignment(String assignmentId, String studentId, AssignmentFiles assignmentFiles) throws Exception {
-        handler.handleRequest(assignmentFiles);
+        var result = handler.handleRequest(assignmentFiles);
+
+        if (!result) {
+            return;
+        }
 
         var assignment = assignments.get(assignmentId);
         var student = students.stream().filter(s -> Objects.equals(s.getId(), studentId)).findFirst().get();
