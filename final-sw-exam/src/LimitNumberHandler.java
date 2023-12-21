@@ -15,12 +15,8 @@ private final int reviewerMin;
     public void handleRequest(AssignmentFiles files) throws Exception {
         var scores = files.getScoreList();
 
-        if (scores.size() < reviewerMin) {
-            throw new Exception("Not enough students");
-        }
-
-        if (scores.size() > reviewerMax) {
-            throw new Exception("Too many students");
+        if (scores.size() < reviewerMin || scores.size() > reviewerMax) {
+            System.out.printf("Assignment should be reviewed by %s-%s students.\n", reviewerMin, reviewerMax);
         }
 
         super.handleRequest(files);

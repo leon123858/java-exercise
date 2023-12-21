@@ -1,8 +1,6 @@
 import java.util.*;
 
 public class PeerReviewSystem {
-    private final int reviewerMin;
-    private final int reviewerMax;
     private final List<Level> levels;
     private final List<Student> students;
     private final Map<String, Assignment> assignments;
@@ -15,12 +13,6 @@ public class PeerReviewSystem {
     }
 
     public PeerReviewSystem(int reviewerMin, int reviewerMax) {
-        if (reviewerMin > reviewerMax) {
-            throw new IllegalArgumentException("reviewerMin should be less than reviewerMax");
-        }
-
-        this.reviewerMin = reviewerMin;
-        this.reviewerMax = reviewerMax;
         levels = new LinkedList<>();
         students = new LinkedList<>();
         assignments = new HashMap<>();
