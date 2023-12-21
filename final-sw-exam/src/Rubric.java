@@ -3,9 +3,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Rubric {
-    private List<RubricDescription> descriptions;
+    private final List<RubricDescription> descriptions;
 
-    public Rubric() {
+    public Rubric(List<RubricDescription> descriptions) {
+        this.descriptions = descriptions;
     }
 
     public List<RubricDescription> getDescriptions() {
@@ -30,5 +31,11 @@ public class Rubric {
         }
 
         return new LinkedList<>(levels);
+    }
+
+    public void PrintRubric() {
+        for (var rubric : descriptions) {
+            System.out.println("(" + rubric.getLevel().getName() + "," + rubric.getCriterion().getName() + ") " + rubric.getDescription());
+        }
     }
 }

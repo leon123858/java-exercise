@@ -24,6 +24,10 @@ public class DoAssignment {
         return ranks;
     }
 
+    public List<Rank> getRanksByCriterion(Criterion criterion) {
+        return ranks.stream().filter(r -> r.getCriterion().equals(criterion)).toList();
+    }
+
     public void addRank(Rank rank) {
         ranks.add(rank);
     }

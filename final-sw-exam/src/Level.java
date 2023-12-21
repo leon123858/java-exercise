@@ -1,6 +1,6 @@
 public class Level {
     private final String name;
-    private final int score;
+    private final double score;
 
     public Level(String name, int score) {
         this.name = name;
@@ -8,5 +8,5 @@ public class Level {
     }
 
     public String getName() { return name; }
-    public int getScore() { return score; }
+    public double getScore() { return score; }
 }

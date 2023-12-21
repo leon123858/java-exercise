@@ -1,7 +1,7 @@
 public class Rank {
-    private Student reviewer;
-    private Level level;
-    private Criterion criterion;
+    private final Student reviewer;
+    private final Level level;
+    private final Criterion criterion;
 
     public Rank(Student reviewer, Level level, Criterion criterion) {
         this.reviewer = reviewer;

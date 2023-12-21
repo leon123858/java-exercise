@@ -1,4 +1,5 @@
 import java.util.Dictionary;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,10 +17,24 @@ public class PeerReviewSystem {
         levels.add(level);
     }
 
-    public void DesignCriterion(String assignmentId, List<CriteriaFiles> criteriaFiles) {
+    public void DesignCriterion(String assignmentId, CriteriaFiles criteriaFiles) {
+        var descriptionList = new LinkedList<RubricDescription>();
 
-        var rankingCriterion = new Rubric();
-        var newAssignment = new Assignment(assignmentId, rankingCriterion);
+        var criterionList = criteriaFiles.getCriteriaList();
+
+        for (var criterionString : criterionList) {
+            var criterion = new Criterion(criterionString);
+            var levelMap = criteriaFiles.get(criterionString);
+
+            for (var level : levels) {
+                var description = levelMap.get(level.getName());
+                var rubricDescription = new RubricDescription(level, criterion, description);
+                descriptionList.add(rubricDescription);
+            }
+        }
+
+        var rubric = new Rubric(descriptionList);
+        var newAssignment = new Assignment(assignmentId, rubric);
 
         for (var student : students) {
             var doAssignment = new DoAssignment(student, newAssignment);
@@ -27,34 +42,49 @@ public class PeerReviewSystem {
         }
     }
 
-    public void Assignment(String assignmentId, String studentId, List<ScoreFiles> scoreFiles) {
+    public void Assignment(String assignmentId, String studentId, AssignmentFiles assignmentFiles) {
         var assignment = assignments.get(assignmentId);
         var student = students.stream().filter(s -> Objects.equals(s.getId(), studentId)).findFirst().get();
 
-        //TODO: add score to doAssignment
+        var scoreFiles = assignmentFiles.getScoreList();
+        for (var scoreFile : scoreFiles) {
+            var reviewer = students.stream().filter(s -> Objects.equals(s.getId(), scoreFile.reviewerId)).findFirst().get();
+            var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().equals(student)).findFirst().get();
+
+            var scoreIndex = 0;
+            for (var criterion : assignment.getRubric().getCriteria()) {
+                var levelString = scoreFile.scores.get(scoreIndex);
+                var level = levels.stream().filter(l -> Objects.equals(l.getName(), levelString)).findFirst().get();
+                var rank = new Rank(reviewer, level, criterion);
+                doAssignment.addRank(rank);
+
+                scoreIndex++;
+            }
+        }
 
     }
 
     public void PrintRubric(String assignmentId) {
         var assignment = assignments.get(assignmentId);
-
-        for (var rubric : assignment.getRankingCriterion().getDescriptions()) {
-            System.out.println("(" + rubric.getLevel().getName() + "," + rubric.getCriterion().getName() + ") " + rubric.getDescription());
-        }
+        assignment.getRubric().PrintRubric();
     }
 
     public void AverageCriterion(String assignmentId) {
         var assignment = assignments.get(assignmentId);
 
-        var totalScore = 0.0;
+        var doAssignmentList = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment)).toList();
 
-        var ranks = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment)).map(DoAssignment::getRanks).toList();
+        for (var criterion : assignment.getRubric().getCriteria()) {
+            var criterionRanks = doAssignmentList.stream().flatMap(a -> a.getRanksByCriterion(criterion).stream()).toList();
 
-        for (var criterion : assignment.getRankingCriterion().getCriteria()) {
+            var average = criterionRanks.stream().mapToDouble(a -> a.getLevel().getScore()).average().orElse(0.0);
+
+            System.out.printf("Assignment: %s, Criterion: %s, AvgScore: %.1f\n", assignmentId, criterion.getName(), average);
         }
     }
 
     public void calculateScore(String assignmentId, String studentId, String rankingStrategy) {
+
     }
 
     public void findStrength(String assignmentId, String studentId, String rankingStrategy) {
