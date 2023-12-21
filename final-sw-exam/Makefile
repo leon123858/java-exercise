@@ -20,4 +20,6 @@ testJavas:
 	cd tmpTest && node test.js "java Main ./sample2.in" "./sample2.out" || true
 	cd tmpTest && node test.js "java Main ./sample3.in" "./sample3.out" || true
 	cd tmpTest && node test.js "java Main ./sample4.in" "./sample4.out" || true
+	cd tmpTest && node test.js "java Main ./sample5.in" "./sample5.out" || true
+	cd tmpTest && node test.js "java Main ./sample6.in" "./sample6.out" || true
 	rm -rf "tmpTest"

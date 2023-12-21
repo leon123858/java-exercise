@@ -24,7 +24,7 @@ public class CommandRunner {
                                     // min student number is 1
                                     if (words.length < 2) {
                                         System.out.println("Error");
-                                        System.exit(1);
+                                        return;
                                     }
                                     ArrayList<String> studentIDs = new ArrayList<>(Arrays.asList(words).subList(1, words.length));
                                     // do something with studentIDs
@@ -37,7 +37,7 @@ public class CommandRunner {
                                 case "schoolStrategy": {
                                     if (words.length < 2) {
                                         System.out.println("Error");
-                                        System.exit(1);
+                                        return;
                                     }
                                     for (int i = 1; i < words.length; i++) {
                                         String[] levelAndScore = words[i].split(",");
@@ -50,7 +50,7 @@ public class CommandRunner {
                                 }
                                 default: {
                                     System.out.println("Error");
-                                    System.exit(1);
+                                    return;
                                 }
                             }
                             break;
