@@ -1,0 +1,20 @@
+student 001 002 003 004
+schoolStrategy Excellent,3 Competent,2 NeedsWork,1
+designCriterion A1 criteria1_A1.txt
+designCriterion A2 criteria1_A1.txt
+assignment A1 001 002,score1_1.txt 003,score1_1.txt 004,score1_2.txt
+assignment A1 002 001,score1_1.txt 003,score1_1.txt 004,score1_2.txt
+assignment A1 003 001,score1_1.txt 002,score1_1.txt 004,score1_2.txt
+assignment A1 004 001,score1_1.txt 002,score1_1.txt 003,score1_2.txt
+assignment A2 004 001,score1_1.txt 002,score1_1.txt 003,score1_2.txt
+assignment A2 003 001,score1_1.txt 002,score1_1.txt 004,score1_2.txt
+assignment A2 002 001,score1_1.txt 003,score1_1.txt 004,score1_2.txt
+assignment A2 001 002,score1_1.txt 003,score1_1.txt 004,score1_2.txt
+averageCriterion A1
+calculateScore A1 001 MeanRankingStrategy
+findStrength A1 002 MeanRankingStrategy
+findWeakness A1 003 MeanRankingStrategy
+averageCriterion A2
+calculateScore A2 004 MeanRankingStrategy
+findStrength A2 002 MeanRankingStrategy
+findWeakness A2 001 MeanRankingStrategy
