@@ -39,6 +39,7 @@ public class PeerReviewSystem {
 
         var rubric = new Rubric(descriptionList);
         var newAssignment = new Assignment(assignmentId, rubric);
+        assignments.put(assignmentId, newAssignment);
 
         for (var student : students) {
             var doAssignment = new DoAssignment(student, newAssignment);
@@ -89,6 +90,21 @@ public class PeerReviewSystem {
 
     public void calculateScore(String assignmentId, String studentId, String rankingStrategy) {
         var strategy = RankingStrategyFactory.create(rankingStrategy);
+
+        var assignment = assignments.get(assignmentId);
+        var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().getId().equals(studentId)).findFirst().get();
+        var ranks = doAssignment.getRanks();
+
+
+        var totalScore = 0.0;
+        for (var criterion : assignment.getRubric().getCriteria()) {
+            var criterionRanks = ranks.stream().filter(r -> r.getCriterion().equals(criterion)).toList();
+            var score = strategy.calculate(criterionRanks);
+
+            totalScore += score;
+        }
+
+
     }
 
     public void findStrength(String assignmentId, String studentId, String rankingStrategy) {
