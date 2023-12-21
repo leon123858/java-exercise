@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Assignment {
+public class AssignmentFiles {
     public String ID;
     public String studentID;
     public ArrayList<String> reviewers;

@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CommandRunner {
     public static void run(String path) {
@@ -86,29 +85,29 @@ public class CommandRunner {
                                     return;
                                 }
                                 // data
-                                Assignment assignment = new Assignment();
-                                assignment.reviewers = new ArrayList<>();
-                                assignment.files = new ArrayList<>();
+                                AssignmentFiles assignmentFiles = new AssignmentFiles();
+                                assignmentFiles.reviewers = new ArrayList<>();
+                                assignmentFiles.files = new ArrayList<>();
                                 // parse assignment
                                 for (int i = 1; i < words.length; i = i + 2) {
                                     String assignmentID = words[i];
                                     String studentID = words[i + 1];
-                                    assignment.ID = assignmentID;
-                                    assignment.studentID = studentID;
+                                    assignmentFiles.ID = assignmentID;
+                                    assignmentFiles.studentID = studentID;
                                     // do something with assignmentID and studentID
                                     for (int j=0;j < studentNumber;j++) {
                                         String reviewerID = words[i + 2 + j * 2];
                                         String sampleScoreFile = words[i + 3 + j * 2];
                                         // do something with reviewerID and sampleScoreFile
-                                        assignment.reviewers.add(reviewerID);
-                                        assignment.files.add(sampleScoreFile);
+                                        assignmentFiles.reviewers.add(reviewerID);
+                                        assignmentFiles.files.add(sampleScoreFile);
                                     }
                                 }
                                 // do something with assignment
-                                System.out.println(assignment.ID);
-                                System.out.println(assignment.studentID);
-                                System.out.println(assignment.reviewers);
-                                System.out.println(assignment.files);
+                                System.out.println(assignmentFiles.ID);
+                                System.out.println(assignmentFiles.studentID);
+                                System.out.println(assignmentFiles.reviewers);
+                                System.out.println(assignmentFiles.files);
                                 // check status
                                 assignmentNumber--;
                                 if (assignmentNumber == 0) {
