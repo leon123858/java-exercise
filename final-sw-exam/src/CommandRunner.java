@@ -167,10 +167,10 @@ public class CommandRunner {
                 String studentID = words[2];
                 String rankingStrategy = words[3];
                 // do something with assignmentID, studentID and rankingStrategy
-                System.out.println(assignmentID);
-                System.out.println(studentID);
-                System.out.println(rankingStrategy);
-//                peerReviewSystem.calculateScore(assignmentID, studentID, rankingStrategy);
+//                System.out.println(assignmentID);
+//                System.out.println(studentID);
+//                System.out.println(rankingStrategy);
+                peerReviewSystem.calculateScore(assignmentID, studentID, rankingStrategy);
                 break;
             }
             case "findStrength": {
@@ -183,10 +183,10 @@ public class CommandRunner {
                 String studentID = words[2];
                 String rankingStrategy = words[3];
                 // do something with assignmentID, studentID and rankingStrategy
-                System.out.println(assignmentID);
-                System.out.println(studentID);
-                System.out.println(rankingStrategy);
-//                peerReviewSystem.findStrength(assignmentID, studentID, rankingStrategy);
+//                System.out.println(assignmentID);
+//                System.out.println(studentID);
+//                System.out.println(rankingStrategy);
+                peerReviewSystem.findStrength(assignmentID, studentID, rankingStrategy);
                 break;
             }
             case "findWeakness": {
@@ -199,10 +199,10 @@ public class CommandRunner {
                 String studentID = words[2];
                 String rankingStrategy = words[3];
                 // do something with assignmentID, studentID and rankingStrategy
-                System.out.println(assignmentID);
-                System.out.println(studentID);
-                System.out.println(rankingStrategy);
-//                peerReviewSystem.findWeakness(assignmentID, studentID, rankingStrategy);
+//                System.out.println(assignmentID);
+//                System.out.println(studentID);
+//                System.out.println(rankingStrategy);
+                peerReviewSystem.findWeakness(assignmentID, studentID, rankingStrategy);
                 break;
             }
             default: {
