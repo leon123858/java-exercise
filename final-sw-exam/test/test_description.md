@@ -17,7 +17,10 @@ each test has its own purpose
     - base on sample2
     - extra: if `assignment` command appears after peer review, print `Error`
 - test 4
-    - requirement: 2 assignments
+    - assignment for same people -> error
+    - duplicate criterion -> error
+    - IO exception -> error
+- test 5
 
 ## Naming Convention
 
