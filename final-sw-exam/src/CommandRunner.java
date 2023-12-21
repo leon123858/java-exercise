@@ -32,7 +32,6 @@ public class CommandRunner {
                                     studentIDs.add(studentID);
                                 }
                                 // do something with studentIDs
-                                System.out.println(studentIDs);
                                 for(String studentID : studentIDs) {
                                     Student student = new Student(studentID);
                                     peerReviewSystem.AddStudent(student);
@@ -74,14 +73,6 @@ public class CommandRunner {
                                 String rubricFile = words[2];
                                 // do something with assignmentID and rubricFile
                                 CriteriaFiles criteriaFiles = new CriteriaFiles(assignmentID, rubricFile);
-                                System.out.println(criteriaFiles.assignmentId);
-                                System.out.println(criteriaFiles.getCriteriaList());
-                                for(String criterion : criteriaFiles.getCriteriaList()) {
-                                    for(String level : criteriaFiles.get(criterion).getLevels()) {
-                                        System.out.println(level);
-                                        System.out.println(criteriaFiles.get(criterion).get(level));
-                                    }
-                                }
                                 // DesignCriterion
                                 peerReviewSystem.DesignCriterion(assignmentID, criteriaFiles);
                                 break;
@@ -98,8 +89,6 @@ public class CommandRunner {
 //                                System.out.println(assignmentFiles.reviewers);
 //                                System.out.println(assignmentFiles.files);
                                 for(ScoreFiles scoreFiles : assignmentFiles.getScoreList()) {
-                                    System.out.println(scoreFiles.reviewerId);
-                                    System.out.println(scoreFiles.scores);
                                     peerReviewSystem.Assignment(assignmentFiles.ID, assignmentFiles.studentID, assignmentFiles);
                                 }
                                 // do something with assignment
@@ -158,7 +147,6 @@ public class CommandRunner {
                 // parse printRubric
                 String assignmentID = words[1];
                 // do something with assignmentID
-                System.out.println(assignmentID);
                 peerReviewSystem.PrintRubric(assignmentID);
                 break;
             }
@@ -166,7 +154,6 @@ public class CommandRunner {
                 // parse averageCriterion
                 String assignmentID = words[1];
                 // do something with assignmentID
-                System.out.println(assignmentID);
                 peerReviewSystem.AverageCriterion(assignmentID);
                 break;
             }
