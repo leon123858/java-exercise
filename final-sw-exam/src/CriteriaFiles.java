@@ -13,6 +13,7 @@ public class CriteriaFiles {
     public CriteriaFiles(String assignmentId, String criterionFilePath) {
         this.assignmentId = assignmentId;
         this.criterionFilePath = criterionFilePath;
+        this.criteriaList = new ArrayList<>();
         // read local file
         try (BufferedReader br = new BufferedReader(new FileReader(this.criterionFilePath))) {
             String line;
