@@ -146,14 +146,14 @@ public class CommandRunner {
             files.add(reviewerAndFile[1]);
         }
         // check if reviewers have same reviewer
-        for (int i = 0; i < reviewers.size(); i++) {
-            for (int j = i + 1; j < reviewers.size(); j++) {
-                if (reviewers.get(i).equals(reviewers.get(j))) {
-                    System.out.println("Error");
-                    return null;
-                }
-            }
-        }
+//        for (int i = 0; i < reviewers.size(); i++) {
+//            for (int j = i + 1; j < reviewers.size(); j++) {
+//                if (reviewers.get(i).equals(reviewers.get(j))) {
+//                    System.out.println("Error");
+//                    return null;
+//                }
+//            }
+//        }
         // do something with assignment
         return new AssignmentFiles(assignmentID, studentID, reviewers, files);
     }
