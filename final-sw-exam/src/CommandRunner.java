@@ -77,6 +77,12 @@ public class CommandRunner {
                                 CriteriaFiles criteriaFiles = new CriteriaFiles(assignmentID, rubricFile);
                                 System.out.println(criteriaFiles.assignmentId);
                                 System.out.println(criteriaFiles.getCriteriaList());
+                                for(String criterion : criteriaFiles.getCriteriaList()) {
+                                    for(String level : criteriaFiles.get(criterion).getLevels()) {
+                                        System.out.println(level);
+                                        System.out.println(criteriaFiles.get(criterion).get(level));
+                                    }
+                                }
                                 break;
                             }
                             case "assignment": {
@@ -84,23 +90,16 @@ public class CommandRunner {
                                     System.out.println("Error");
                                     continue;
                                 }
-                                // data
-                                AssignmentFiles assignmentFiles = new AssignmentFiles();
-                                assignmentFiles.reviewers = new ArrayList<>();
-                                assignmentFiles.files = new ArrayList<>();
                                 // parse assignment
-                                assignmentFiles.ID = words[1];
-                                assignmentFiles.studentID = words[2];
-                                for (int i = 3; i < words.length; i++) {
-                                    String[] reviewerAndFile = words[i].split(",");
-                                    assignmentFiles.reviewers.add(reviewerAndFile[0]);
-                                    assignmentFiles.files.add(reviewerAndFile[1]);
+                                AssignmentFiles assignmentFiles = getAssignmentFilesCreate(words);
+//                                System.out.println(assignmentFiles.ID);
+//                                System.out.println(assignmentFiles.studentID);
+//                                System.out.println(assignmentFiles.reviewers);
+//                                System.out.println(assignmentFiles.files);
+                                for(ScoreFiles scoreFiles : assignmentFiles.getScoreList()) {
+                                    System.out.println(scoreFiles.reviewerId);
+                                    System.out.println(scoreFiles.scores);
                                 }
-                                // do something with assignment
-                                System.out.println(assignmentFiles.ID);
-                                System.out.println(assignmentFiles.studentID);
-                                System.out.println(assignmentFiles.reviewers);
-                                System.out.println(assignmentFiles.files);
                                 break;
                             }
                             default: {
@@ -133,6 +132,21 @@ public class CommandRunner {
         } catch (IOException e) {
             System.out.println("Error");
         }
+    }
+
+    private static AssignmentFiles getAssignmentFilesCreate(String[] words) {
+        String assignmentID = words[1];
+        String studentID = words[2];
+        ArrayList<String> reviewers = new ArrayList<>();
+        ArrayList<String> files = new ArrayList<>();
+        // parse assignment
+        for (int i = 3; i < words.length; i++) {
+            String[] reviewerAndFile = words[i].split(",");
+            reviewers.add(reviewerAndFile[0]);
+            files.add(reviewerAndFile[1]);
+        }
+        // do something with assignment
+        return new AssignmentFiles(assignmentID, studentID, reviewers, files);
     }
 
     private static void getFunc(String[] words){
