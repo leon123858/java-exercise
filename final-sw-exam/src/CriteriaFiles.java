@@ -8,10 +8,12 @@ import java.util.Map;
 public class CriteriaFiles {
     public String assignmentId;
     public String criterionFilePath;
+    private ArrayList<String> criteriaList;
 
     public CriteriaFiles(String assignmentId, String criterionFilePath) {
         this.assignmentId = assignmentId;
         this.criterionFilePath = criterionFilePath;
+        this.criteriaList = new ArrayList<>();
         // read local file
         try (BufferedReader br = new BufferedReader(new FileReader(this.criterionFilePath))) {
             String line;
@@ -25,6 +27,7 @@ public class CriteriaFiles {
                 String description = words[2];
                 if (!CriteriaMap.containsKey(criterion)) {
                     CriteriaMap.put(criterion, new LevelMapDescription());
+                    criteriaList.add(criterion);
                 }
                 CriteriaMap.get(criterion).put(level, description);
             }
@@ -40,6 +43,6 @@ public class CriteriaFiles {
     }
 
     public ArrayList<String> getCriteriaList() {
-        return new ArrayList<>(CriteriaMap.keySet());
+        return criteriaList;
     }
 }
