@@ -84,7 +84,7 @@ public class PeerReviewSystem {
     }
 
     public void calculateScore(String assignmentId, String studentId, String rankingStrategy) {
-
+        var strategy = RankingStrategyFactory.create(rankingStrategy);
     }
 
     public void findStrength(String assignmentId, String studentId, String rankingStrategy) {
