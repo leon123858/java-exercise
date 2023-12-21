@@ -56,8 +56,10 @@ public class PeerReviewSystem {
             var reviewer = students.stream().filter(s -> Objects.equals(s.getId(), scoreFile.reviewerId)).findFirst().get();
             var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().equals(student)).findFirst().get();
 
+            var criterionList = assignment.getRubric().getCriteria();
+
             var scoreIndex = 0;
-            for (var criterion : assignment.getRubric().getCriteria()) {
+            for (var criterion : criterionList) {
                 var levelString = scoreFile.scores.get(scoreIndex);
                 var level = levels.stream().filter(l -> Objects.equals(l.getName(), levelString)).findFirst().get();
                 var rank = new Rank(reviewer, level, criterion);
@@ -65,8 +67,9 @@ public class PeerReviewSystem {
 
                 scoreIndex++;
             }
-        }
 
+            System.out.printf("%s-%s was reviewed by %s. Level: %s\n", assignmentId, studentId, scoreFile.reviewerId, String.join(" ", scoreFile.scores.subList(0, criterionList.size())));
+        }
     }
 
     public void PrintRubric(String assignmentId) {
