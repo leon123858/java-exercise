@@ -25,6 +25,9 @@ each test has its own purpose
 - test 6
   - requirement: assignment errors
   - base on sample1
+- test 7
+  - requirement: multiple assignments
+  - base on sample1
 
 ## Naming Convention
 
