@@ -10,120 +10,124 @@ public class CommandRunner {
             String line;
             Status mode = Status.BEFORE;
             while ((line = br.readLine()) != null) {
-                String[] words = line.split(" ");
-                if (words.length == 0) {
-                    System.out.println("Error");
-                }
-                switch (mode) {
-                    //student [StudentID] [StudentID] …
-                    //schoolStrategy [Level],[Score] [Level],[Score] …
-                    case BEFORE: {
-                        switch (words[0]) {
-                            case "student": {
-                                // min student number is 1
-                                if (words.length < 2) {
-                                    System.out.println("Error");
-                                    System.exit(1);
-                                }
-                                ArrayList<String> studentIDs = new ArrayList<>(Arrays.asList(words).subList(1, words.length));
-                                // do something with studentIDs
-                                for (String studentID : studentIDs) {
-                                    Student student = new Student(studentID);
-                                    peerReviewSystem.AddStudent(student);
-                                }
-                                break;
-                            }
-                            case "schoolStrategy": {
-                                if (words.length < 2) {
-                                    System.out.println("Error");
-                                    System.exit(1);
-                                }
-                                for (int i = 1; i < words.length; i++) {
-                                    String[] levelAndScore = words[i].split(",");
-                                    Level level = new Level(levelAndScore[0], Double.parseDouble(levelAndScore[1]));
-                                    peerReviewSystem.AddLevel(level);
-                                }
-                                // set status
-                                mode = Status.ING;
-                                break;
-                            }
-                            default: {
-                                System.out.println("Error");
-                                System.exit(1);
-                            }
-                        }
-                        break;
+                try {
+                    String[] words = line.split(" ");
+                    if (words.length == 0) {
+                        System.out.println("Error");
                     }
-                    //designCriterion [AssignmentID] [RubricFile]
-                    //assignment [AssignmentID] [StudentID] [ReviewrID],[SampleScoreFile] [ReviewrID],[SampleScoreFile]...
-                    case ING: {
-                        switch (words[0]) {
-                            case "designCriterion": {
-                                if (words.length != 3) {
-                                    System.out.println("Error");
-                                    continue;
+                    switch (mode) {
+                        //student [StudentID] [StudentID] …
+                        //schoolStrategy [Level],[Score] [Level],[Score] …
+                        case BEFORE: {
+                            switch (words[0]) {
+                                case "student": {
+                                    // min student number is 1
+                                    if (words.length < 2) {
+                                        System.out.println("Error");
+                                        System.exit(1);
+                                    }
+                                    ArrayList<String> studentIDs = new ArrayList<>(Arrays.asList(words).subList(1, words.length));
+                                    // do something with studentIDs
+                                    for (String studentID : studentIDs) {
+                                        Student student = new Student(studentID);
+                                        peerReviewSystem.AddStudent(student);
+                                    }
+                                    break;
                                 }
-                                // parse designCriterion
-                                String assignmentID = words[1];
-                                String rubricFile = words[2];
-                                // do something with assignmentID and rubricFile
-                                CriteriaFiles criteriaFiles = new CriteriaFiles(assignmentID, rubricFile);
-                                // DesignCriterion
-                                peerReviewSystem.DesignCriterion(assignmentID, criteriaFiles);
-                                break;
+                                case "schoolStrategy": {
+                                    if (words.length < 2) {
+                                        System.out.println("Error");
+                                        System.exit(1);
+                                    }
+                                    for (int i = 1; i < words.length; i++) {
+                                        String[] levelAndScore = words[i].split(",");
+                                        Level level = new Level(levelAndScore[0], Double.parseDouble(levelAndScore[1]));
+                                        peerReviewSystem.AddLevel(level);
+                                    }
+                                    // set status
+                                    mode = Status.ING;
+                                    break;
+                                }
+                                default: {
+                                    System.out.println("Error");
+                                    System.exit(1);
+                                }
                             }
-                            case "assignment": {
-                                if (words.length < 4) {
-                                    System.out.println("Error");
-                                    continue;
+                            break;
+                        }
+                        //designCriterion [AssignmentID] [RubricFile]
+                        //assignment [AssignmentID] [StudentID] [ReviewrID],[SampleScoreFile] [ReviewrID],[SampleScoreFile]...
+                        case ING: {
+                            switch (words[0]) {
+                                case "designCriterion": {
+                                    if (words.length != 3) {
+                                        System.out.println("Error");
+                                        continue;
+                                    }
+                                    // parse designCriterion
+                                    String assignmentID = words[1];
+                                    String rubricFile = words[2];
+                                    // do something with assignmentID and rubricFile
+                                    CriteriaFiles criteriaFiles = new CriteriaFiles(assignmentID, rubricFile);
+                                    // DesignCriterion
+                                    peerReviewSystem.DesignCriterion(assignmentID, criteriaFiles);
+                                    break;
                                 }
-                                // parse assignment
-                                AssignmentFiles assignmentFiles = getAssignmentFilesCreate(words);
+                                case "assignment": {
+                                    if (words.length < 4) {
+                                        System.out.println("Error");
+                                        continue;
+                                    }
+                                    // parse assignment
+                                    AssignmentFiles assignmentFiles = getAssignmentFilesCreate(words);
 //                                System.out.println(assignmentFiles.ID);
 //                                System.out.println(assignmentFiles.studentID);
 //                                System.out.println(assignmentFiles.reviewers);
 //                                System.out.println(assignmentFiles.files);
-                                peerReviewSystem.Assignment(assignmentFiles.ID, assignmentFiles.studentID, assignmentFiles);
-                                // do something with assignment
-                                break;
-                            }
-                            default: {
-                                if (words.length < 2) {
-                                    System.out.println("Error");
-                                    continue;
+                                    peerReviewSystem.Assignment(assignmentFiles.ID, assignmentFiles.studentID, assignmentFiles);
+                                    // do something with assignment
+                                    break;
                                 }
-                                //# after peer review
-                                //printRubric [AssignmentID]
-                                //averageCriterion [AssignmentID]
-                                //calculateScore [AssignmentID] [StudentID] [RankingStrategy]
-                                //findStrength [AssignmentID] [StudentID] [RankingStrategy]
-                                //findWeakness [AssignmentID] [StudentID] [RankingStrategy]
-                                String[] getFuncCase = new String[]{"printRubric", "averageCriterion", "calculateScore", "findStrength", "findWeakness"};
-                                for(String getFuncCaseItem : getFuncCase) {
-                                    if (words[0].equals(getFuncCaseItem)) {
-                                        mode = Status.AFTER;
-                                        getFunc(words, peerReviewSystem);
-                                        break;
+                                default: {
+                                    if (words.length < 2) {
+                                        System.out.println("Error");
+                                        continue;
                                     }
+                                    //# after peer review
+                                    //printRubric [AssignmentID]
+                                    //averageCriterion [AssignmentID]
+                                    //calculateScore [AssignmentID] [StudentID] [RankingStrategy]
+                                    //findStrength [AssignmentID] [StudentID] [RankingStrategy]
+                                    //findWeakness [AssignmentID] [StudentID] [RankingStrategy]
+                                    String[] getFuncCase = new String[]{"printRubric", "averageCriterion", "calculateScore", "findStrength", "findWeakness"};
+                                    for(String getFuncCaseItem : getFuncCase) {
+                                        if (words[0].equals(getFuncCaseItem)) {
+                                            mode = Status.AFTER;
+                                            getFunc(words, peerReviewSystem);
+                                            break;
+                                        }
+                                    }
+                                    break;
                                 }
-                                break;
                             }
-                        }
-                        continue;
-                    }
-                    //printRubric [AssignmentID]
-                    //averageCriterion [AssignmentID]
-                    //calculateScore [AssignmentID] [StudentID] [RankingStrategy]
-                    //findStrength [AssignmentID] [StudentID] [RankingStrategy]
-                    //findWeakness [AssignmentID] [StudentID] [RankingStrategy]
-                    case AFTER: {
-                        if (words.length < 2) {
-                            System.out.println("Error");
                             continue;
                         }
-                        getFunc(words, peerReviewSystem);
-                        break;
+                        //printRubric [AssignmentID]
+                        //averageCriterion [AssignmentID]
+                        //calculateScore [AssignmentID] [StudentID] [RankingStrategy]
+                        //findStrength [AssignmentID] [StudentID] [RankingStrategy]
+                        //findWeakness [AssignmentID] [StudentID] [RankingStrategy]
+                        case AFTER: {
+                            if (words.length < 2) {
+                                System.out.println("Error");
+                                continue;
+                            }
+                            getFunc(words, peerReviewSystem);
+                            break;
+                        }
                     }
+                }catch(Exception e) {
+                    System.out.println("Error");
                 }
             }
         } catch (Exception e) {
