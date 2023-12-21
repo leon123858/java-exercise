@@ -1,13 +1,17 @@
-import java.util.Dictionary;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class PeerReviewSystem {
     private List<Level> levels;
     private List<Student> students;
-    private Dictionary<String, Assignment> assignments;
+    private Map<String, Assignment> assignments;
     private List<DoAssignment> doAssignments;
+
+    PeerReviewSystem() {
+        levels = new LinkedList<>();
+        students = new LinkedList<>();
+        assignments = new HashMap<>();
+        doAssignments = new LinkedList<>();
+    }
 
     public void AddStudent(Student student) {
         students.add(student);
