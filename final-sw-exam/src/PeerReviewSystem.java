@@ -20,7 +20,9 @@ public class PeerReviewSystem {
 
         var limitNumberHandler = new LimitNumberHandler(reviewerMin, reviewerMax);
         var sameStudentHandler = new SameStudentHandler();
+        var duplicateHandler = new DuplicateReviewerHandler();
         limitNumberHandler.setNext(sameStudentHandler);
+        sameStudentHandler.setNext(duplicateHandler);
 
         handler = limitNumberHandler;
     }
