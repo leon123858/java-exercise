@@ -88,12 +88,18 @@ public class CommandRunner {
                                 break;
                             }
                             default: {
-                                mode = Status.AFTER;
                                 if (words.length < 2) {
                                     System.out.println("Error");
                                     continue;
                                 }
-                                getFunc(words, peerReviewSystem);
+                                String[] getFuncCase = new String[]{"printRubric", "averageCriterion", "calculateScore", "findStrength", "findWeakness"};
+                                for(String getFuncCaseItem : getFuncCase) {
+                                    if (words[0].equals(getFuncCaseItem)) {
+                                        mode = Status.AFTER;
+                                        getFunc(words, peerReviewSystem);
+                                        break;
+                                    }
+                                }
                                 break;
                             }
                         }

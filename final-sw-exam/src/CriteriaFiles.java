@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CriteriaFiles {
+    private final ArrayList<String> criteriaList;
     public String assignmentId;
     public String criterionFilePath;
     public Map<String, LevelMapDescription> CriteriaMap = new HashMap<>();
-    private final ArrayList<String> criteriaList;
 
     public CriteriaFiles(String assignmentId, String criterionFilePath) {
         this.assignmentId = assignmentId;
