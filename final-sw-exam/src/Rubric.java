@@ -32,7 +32,7 @@ public class Rubric {
 
     public void PrintRubric() {
         for (var rubric : descriptions) {
-            System.out.println("(" + rubric.getLevel().getName() + "," + rubric.getCriterion().getName() + ") " + rubric.getDescription());
+            System.out.println("(" + rubric.getCriterion().getName() + "," + rubric.getLevel().getName() + ") " + rubric.getDescription());
         }
     }
 }
