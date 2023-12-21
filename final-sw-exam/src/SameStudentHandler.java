@@ -8,7 +8,7 @@ public class SameStudentHandler extends BaseHandler {
 
         if (reviewers.contains(student)) {
             System.out.println("Cannot review one’s own assignment.");
-            throw new Exception("Cannot review one’s own assignment.");
+            return false;
         }
 
         return super.handleRequest(files);
