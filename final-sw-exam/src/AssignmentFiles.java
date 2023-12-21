@@ -8,6 +8,4 @@ public class AssignmentFiles {
 
     public AssignmentFiles() {
     }
-
-
 }
