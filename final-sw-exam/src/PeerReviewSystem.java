@@ -1,12 +1,11 @@
 import java.util.*;
 
 public class PeerReviewSystem {
-    private final int reviewerMin;
-    private final int reviewerMax;
     private final List<Level> levels;
     private final List<Student> students;
     private final Map<String, Assignment> assignments;
     private final List<DoAssignment> doAssignments;
+    private Handler handler;
 
     public PeerReviewSystem()
     {
@@ -14,16 +13,18 @@ public class PeerReviewSystem {
     }
 
     public PeerReviewSystem(int reviewerMin, int reviewerMax) {
-        if (reviewerMin > reviewerMax) {
-            throw new IllegalArgumentException("reviewerMin should be less than reviewerMax");
-        }
-
-        this.reviewerMin = reviewerMin;
-        this.reviewerMax = reviewerMax;
         levels = new LinkedList<>();
         students = new LinkedList<>();
         assignments = new HashMap<>();
         doAssignments = new LinkedList<>();
+
+        var limitNumberHandler = new LimitNumberHandler(reviewerMin, reviewerMax);
+        var sameStudentHandler = new SameStudentHandler();
+        var duplicateHandler = new DuplicateReviewerHandler();
+        limitNumberHandler.setNext(sameStudentHandler);
+        sameStudentHandler.setNext(duplicateHandler);
+
+        handler = limitNumberHandler;
     }
 
     public void AddStudent(Student student) {
@@ -67,8 +68,9 @@ public class PeerReviewSystem {
     }
 
     public void Assignment(String assignmentId, String studentId, AssignmentFiles assignmentFiles) throws Exception {
-        if (assignmentFiles.getScoreList().size() < reviewerMin || assignmentFiles.getScoreList().size() > reviewerMax) {
-            System.out.printf("Assignment should be reviewed by %s-%s students.\n", reviewerMin, reviewerMax);
+        var result = handler.handleRequest(assignmentFiles);
+
+        if (!result) {
             return;
         }
 
@@ -83,11 +85,6 @@ public class PeerReviewSystem {
         var scoreFiles = assignmentFiles.getScoreList();
         for (var scoreFile : scoreFiles) {
             var reviewer = students.stream().filter(s -> Objects.equals(s.getId(), scoreFile.reviewerId)).findFirst().get();
-
-            if (reviewer.equals(student)) {
-                System.out.println("Cannot review one’s own assignment.");
-                return;
-            }
 
             var criterionList = assignment.getRubric().getCriteria();
 
