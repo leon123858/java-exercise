@@ -7,7 +7,7 @@ testJava:
 	rsync -a "src/" "tmpTest"
 	cd "tmpTest" && javac *.java
 	cp "test.js" "tmpTest/test.js"
-	cd tmpTest && node test.js "java Main ./sample2.in" "./sample2.out" || true
+	cd tmpTest && node test.js "java Main ./sample1.in" "./sample1.out" || true
 	rm -rf "tmpTest"
 
 testJavas:
@@ -18,4 +18,5 @@ testJavas:
 	cp "test.js" "tmpTest/test.js"
 	cd tmpTest && node test.js "java Main ./sample1.in" "./sample1.out" || true
 	cd tmpTest && node test.js "java Main ./sample2.in" "./sample2.out" || true
+	cd tmpTest && node test.js "java Main ./sample3.in" "./sample3.out" || true
 	rm -rf "tmpTest"
