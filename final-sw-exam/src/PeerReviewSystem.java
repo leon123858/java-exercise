@@ -86,7 +86,7 @@ public class PeerReviewSystem {
 
             if (reviewer.equals(student)) {
                 System.out.println("Cannot review one’s own assignment.");
-                continue;
+                return;
             }
 
             var criterionList = assignment.getRubric().getCriteria();
