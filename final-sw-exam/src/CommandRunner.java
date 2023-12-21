@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class CommandRunner {
     public static void run(String path) {
+        PeerReviewSystem peerReviewSystem = new PeerReviewSystem();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             Status mode = Status.BEFORE;
@@ -32,6 +33,10 @@ public class CommandRunner {
                                 }
                                 // do something with studentIDs
                                 System.out.println(studentIDs);
+                                for(String studentID : studentIDs) {
+                                    Student student = new Student(studentID);
+                                    peerReviewSystem.AddStudent(student);
+                                }
                                 break;
                             }
                             case "schoolStrategy": {
@@ -39,17 +44,11 @@ public class CommandRunner {
                                     System.out.println("Error");
                                     System.exit(1);
                                 }
-                                System.out.println(words.length);
-                                ArrayList<String> Levels = new ArrayList<>();
-                                ArrayList<String> Scores = new ArrayList<>();
                                 for (int i = 1; i < words.length; i++) {
                                     String[] levelAndScore = words[i].split(",");
-                                    Levels.add(levelAndScore[0]);
-                                    Scores.add(levelAndScore[1]);
+                                    Level level = new Level(levelAndScore[0], Double.parseDouble(levelAndScore[1]));
+                                    peerReviewSystem.AddLevel(level);
                                 }
-                                // parse schoolStrategies
-                                System.out.println(Levels);
-                                System.out.println(Scores);
                                 // set status
                                 mode = Status.ING;
                                 break;
@@ -83,6 +82,8 @@ public class CommandRunner {
                                         System.out.println(criteriaFiles.get(criterion).get(level));
                                     }
                                 }
+                                // DesignCriterion
+                                peerReviewSystem.DesignCriterion(assignmentID, criteriaFiles);
                                 break;
                             }
                             case "assignment": {
@@ -99,7 +100,9 @@ public class CommandRunner {
                                 for(ScoreFiles scoreFiles : assignmentFiles.getScoreList()) {
                                     System.out.println(scoreFiles.reviewerId);
                                     System.out.println(scoreFiles.scores);
+                                    peerReviewSystem.Assignment(assignmentFiles.ID, assignmentFiles.studentID, assignmentFiles);
                                 }
+                                // do something with assignment
                                 break;
                             }
                             default: {
@@ -108,7 +111,7 @@ public class CommandRunner {
                                     System.out.println("Error");
                                     continue;
                                 }
-                                getFunc(words);
+                                getFunc(words, peerReviewSystem);
                                 break;
                             }
                         }
@@ -124,7 +127,7 @@ public class CommandRunner {
                             System.out.println("Error");
                             continue;
                         }
-                        getFunc(words);
+                        getFunc(words, peerReviewSystem);
                         break;
                     }
                 }
@@ -149,13 +152,14 @@ public class CommandRunner {
         return new AssignmentFiles(assignmentID, studentID, reviewers, files);
     }
 
-    private static void getFunc(String[] words){
+    private static void getFunc(String[] words, PeerReviewSystem peerReviewSystem){
         switch (words[0]) {
             case "printRubric": {
                 // parse printRubric
                 String assignmentID = words[1];
                 // do something with assignmentID
                 System.out.println(assignmentID);
+                peerReviewSystem.PrintRubric(assignmentID);
                 break;
             }
             case "averageCriterion": {
@@ -163,6 +167,7 @@ public class CommandRunner {
                 String assignmentID = words[1];
                 // do something with assignmentID
                 System.out.println(assignmentID);
+                peerReviewSystem.AverageCriterion(assignmentID);
                 break;
             }
             case "calculateScore": {
@@ -178,6 +183,7 @@ public class CommandRunner {
                 System.out.println(assignmentID);
                 System.out.println(studentID);
                 System.out.println(rankingStrategy);
+                peerReviewSystem.calculateScore(assignmentID, studentID, rankingStrategy);
                 break;
             }
             case "findStrength": {
@@ -193,6 +199,7 @@ public class CommandRunner {
                 System.out.println(assignmentID);
                 System.out.println(studentID);
                 System.out.println(rankingStrategy);
+                peerReviewSystem.findStrength(assignmentID, studentID, rankingStrategy);
                 break;
             }
             case "findWeakness": {
@@ -208,6 +215,7 @@ public class CommandRunner {
                 System.out.println(assignmentID);
                 System.out.println(studentID);
                 System.out.println(rankingStrategy);
+                peerReviewSystem.findWeakness(assignmentID, studentID, rankingStrategy);
                 break;
             }
             default: {
