@@ -92,6 +92,12 @@ public class CommandRunner {
                                     System.out.println("Error");
                                     continue;
                                 }
+                                //# after peer review
+                                //printRubric [AssignmentID]
+                                //averageCriterion [AssignmentID]
+                                //calculateScore [AssignmentID] [StudentID] [RankingStrategy]
+                                //findStrength [AssignmentID] [StudentID] [RankingStrategy]
+                                //findWeakness [AssignmentID] [StudentID] [RankingStrategy]
                                 String[] getFuncCase = new String[]{"printRubric", "averageCriterion", "calculateScore", "findStrength", "findWeakness"};
                                 for(String getFuncCaseItem : getFuncCase) {
                                     if (words[0].equals(getFuncCaseItem)) {
