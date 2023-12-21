@@ -128,9 +128,14 @@ public class PeerReviewSystem {
         }
 
         var maxScore = criterionScoreMap.values().stream().max(Double::compareTo).get();
-        var maxScoreCriteria = criterionScoreMap.entrySet().stream().filter(e -> e.getValue().equals(maxScore)).map(e -> e.getKey().getName()).toList();
+        var criterionString = new StringBuilder();
+        for (var criterion : criterions) {
+            if (criterionScoreMap.get(criterion).equals(maxScore)) {
+                criterionString.append(" ").append(criterion.getName());
+            }
+        }
 
-        System.out.printf("Assignment: %s, Student: %s, Strength: %s\n", assignmentId, studentId, String.join(" ", maxScoreCriteria));
+        System.out.printf("Assignment: %s, Student: %s, Strength:%s", assignmentId, studentId, criterionString);
     }
 
     public void findWeakness(String assignmentId, String studentId, String rankingStrategy) {
@@ -151,8 +156,14 @@ public class PeerReviewSystem {
         }
 
         var minScore = criterionScoreMap.values().stream().min(Double::compareTo).get();
-        var minScoreCriteria = criterionScoreMap.entrySet().stream().filter(e -> e.getValue().equals(minScore)).map(e -> e.getKey().getName()).toList();
 
-        System.out.printf("Assignment: %s, Student: %s, Weakness: %s\n", assignmentId, studentId, String.join(" ", minScoreCriteria));
+        var criterionString = new StringBuilder();
+        for (var criterion : criterions) {
+            if (criterionScoreMap.get(criterion).equals(minScore)) {
+                criterionString.append(" ").append(criterion.getName());
+            }
+        }
+
+        System.out.printf("Assignment: %s, Student: %s, Weakness:%s", assignmentId, studentId, criterionString);
     }
 }
