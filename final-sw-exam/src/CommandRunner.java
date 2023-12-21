@@ -80,10 +80,9 @@ public class CommandRunner {
                                     }
                                     // parse assignment
                                     AssignmentFiles assignmentFiles = getAssignmentFilesCreate(words);
-//                                System.out.println(assignmentFiles.ID);
-//                                System.out.println(assignmentFiles.studentID);
-//                                System.out.println(assignmentFiles.reviewers);
-//                                System.out.println(assignmentFiles.files);
+                                    if(assignmentFiles == null) {
+                                        continue;
+                                    }
                                     peerReviewSystem.Assignment(assignmentFiles.ID, assignmentFiles.studentID, assignmentFiles);
                                     // do something with assignment
                                     break;
@@ -145,6 +144,15 @@ public class CommandRunner {
             String[] reviewerAndFile = words[i].split(",");
             reviewers.add(reviewerAndFile[0]);
             files.add(reviewerAndFile[1]);
+        }
+        // check if reviewers have same reviewer
+        for (int i = 0; i < reviewers.size(); i++) {
+            for (int j = i + 1; j < reviewers.size(); j++) {
+                if (reviewers.get(i).equals(reviewers.get(j))) {
+                    System.out.println("Error");
+                    return null;
+                }
+            }
         }
         // do something with assignment
         return new AssignmentFiles(assignmentID, studentID, reviewers, files);
