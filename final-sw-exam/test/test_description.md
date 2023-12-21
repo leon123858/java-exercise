@@ -9,6 +9,12 @@ each test has its own purpose
   - requirement: the levels and scores might change
   - 5 students, 1 assignment, 4 criteria, 4 Levels
   - note: some of the student will not get scored
+  - note: some of the assignment doesn't exist
+- test 3
+  - requirement: the RankingStrategy might change
+  - base on sample2
+- test 4
+  - requirement: 2 assignments
 
 ## Naming Convention
 ### notation
