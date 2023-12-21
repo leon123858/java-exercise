@@ -9,7 +9,15 @@ public class RubricDescription {
         this.description = description;
     }
 
-    public Level getLevel() { return level; }
-    public Criterion getCriterion() { return criterion; }
-    public String getDescription() { return description; }
+    public Level getLevel() {
+        return level;
+    }
+
+    public Criterion getCriterion() {
+        return criterion;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

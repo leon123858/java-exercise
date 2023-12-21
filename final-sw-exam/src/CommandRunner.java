@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,10 +25,9 @@ public class CommandRunner {
                                     System.out.println("Error");
                                     System.exit(1);
                                 }
-                                ArrayList<String> studentIDs = new ArrayList<>();
-                                studentIDs.addAll(Arrays.asList(words).subList(1, words.length));
+                                ArrayList<String> studentIDs = new ArrayList<>(Arrays.asList(words).subList(1, words.length));
                                 // do something with studentIDs
-                                for(String studentID : studentIDs) {
+                                for (String studentID : studentIDs) {
                                     Student student = new Student(studentID);
                                     peerReviewSystem.AddStudent(student);
                                 }
@@ -116,7 +114,7 @@ public class CommandRunner {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Error");
         }
     }
@@ -136,7 +134,7 @@ public class CommandRunner {
         return new AssignmentFiles(assignmentID, studentID, reviewers, files);
     }
 
-    private static void getFunc(String[] words, PeerReviewSystem peerReviewSystem){
+    private static void getFunc(String[] words, PeerReviewSystem peerReviewSystem) {
         switch (words[0]) {
             case "printRubric": {
                 // parse printRubric

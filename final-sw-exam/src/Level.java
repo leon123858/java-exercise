@@ -7,6 +7,11 @@ public class Level {
         this.score = score;
     }
 
-    public String getName() { return name; }
-    public double getScore() { return score; }
+    public String getName() {
+        return name;
+    }
+
+    public double getScore() {
+        return score;
+    }
 }

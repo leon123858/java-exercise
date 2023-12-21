@@ -8,7 +8,8 @@ import java.util.Map;
 public class CriteriaFiles {
     public String assignmentId;
     public String criterionFilePath;
-    private ArrayList<String> criteriaList;
+    public Map<String, LevelMapDescription> CriteriaMap = new HashMap<>();
+    private final ArrayList<String> criteriaList;
 
     public CriteriaFiles(String assignmentId, String criterionFilePath) {
         this.assignmentId = assignmentId;
@@ -35,8 +36,6 @@ public class CriteriaFiles {
             System.out.println("Error");
         }
     }
-
-    public Map<String, LevelMapDescription> CriteriaMap = new HashMap<>();
 
     public LevelMapDescription get(String criterion) {
         return CriteriaMap.get(criterion);

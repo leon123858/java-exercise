@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Rubric {
@@ -12,23 +9,23 @@ public class Rubric {
         this.criterionList = criterionList;
     }
 
-    public List<RubricDescription> getDescriptions() {
-        return descriptions;
-    }
+//    public List<RubricDescription> getDescriptions() {
+//        return descriptions;
+//    }
 
     public List<Criterion> getCriteria() {
         return criterionList;
     }
 
-    public List<Level> getLevels() {
-        var levels = new HashSet<Level>();
-
-        for (var rubric : descriptions) {
-            levels.add(rubric.getLevel());
-        }
-
-        return new LinkedList<>(levels);
-    }
+//    public List<Level> getLevels() {
+//        var levels = new HashSet<Level>();
+//
+//        for (var rubric : descriptions) {
+//            levels.add(rubric.getLevel());
+//        }
+//
+//        return new LinkedList<>(levels);
+//    }
 
     public void PrintRubric() {
         for (var rubric : descriptions) {
