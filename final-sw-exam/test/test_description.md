@@ -15,6 +15,7 @@ each test has its own purpose
 - test 3
     - requirement: the RankingStrategy might change
     - base on sample2
+    - extra: if `assignment` command appears after peer review, print `Error`
 - test 4
     - requirement: 2 assignments
 
