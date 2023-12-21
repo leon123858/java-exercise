@@ -1,5 +1,5 @@
 public class Criterion {
-    private String name;
+    private final String name;
 
     public Criterion(String name) {
         this.name = name;

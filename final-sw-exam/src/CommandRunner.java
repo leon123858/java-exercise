@@ -27,10 +27,7 @@ public class CommandRunner {
                                     System.exit(1);
                                 }
                                 ArrayList<String> studentIDs = new ArrayList<>();
-                                for (int i = 1; i < words.length; i++) {
-                                    String studentID = words[i];
-                                    studentIDs.add(studentID);
-                                }
+                                studentIDs.addAll(Arrays.asList(words).subList(1, words.length));
                                 // do something with studentIDs
                                 for(String studentID : studentIDs) {
                                     Student student = new Student(studentID);

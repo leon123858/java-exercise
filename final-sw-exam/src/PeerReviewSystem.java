@@ -1,10 +1,10 @@
 import java.util.*;
 
 public class PeerReviewSystem {
-    private List<Level> levels;
-    private List<Student> students;
-    private Map<String, Assignment> assignments;
-    private List<DoAssignment> doAssignments;
+    private final List<Level> levels;
+    private final List<Student> students;
+    private final Map<String, Assignment> assignments;
+    private final List<DoAssignment> doAssignments;
 
     PeerReviewSystem() {
         levels = new LinkedList<>();
