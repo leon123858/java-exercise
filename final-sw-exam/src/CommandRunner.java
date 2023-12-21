@@ -146,7 +146,7 @@ public class CommandRunner {
         return new AssignmentFiles(assignmentID, studentID, reviewers, files);
     }
 
-    private static void getFunc(String[] words, PeerReviewSystem peerReviewSystem) {
+    private static void getFunc(String[] words, PeerReviewSystem peerReviewSystem) throws Exception {
         switch (words[0]) {
             case "printRubric": {
                 // parse printRubric

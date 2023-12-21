@@ -1,12 +1,25 @@
 import java.util.*;
 
 public class PeerReviewSystem {
+    private final int reviewerMin;
+    private final int reviewerMax;
     private final List<Level> levels;
     private final List<Student> students;
     private final Map<String, Assignment> assignments;
     private final List<DoAssignment> doAssignments;
 
-    PeerReviewSystem() {
+    public PeerReviewSystem()
+    {
+        this(3, 5);
+    }
+
+    public PeerReviewSystem(int reviewerMin, int reviewerMax) {
+        if (reviewerMin > reviewerMax) {
+            throw new IllegalArgumentException("reviewerMin should be less than reviewerMax");
+        }
+
+        this.reviewerMin = reviewerMin;
+        this.reviewerMax = reviewerMax;
         levels = new LinkedList<>();
         students = new LinkedList<>();
         assignments = new HashMap<>();
@@ -21,7 +34,11 @@ public class PeerReviewSystem {
         levels.add(level);
     }
 
-    public void DesignCriterion(String assignmentId, CriteriaFiles criteriaFiles) {
+    public void DesignCriterion(String assignmentId, CriteriaFiles criteriaFiles) throws Exception {
+        if (assignments.containsKey(assignmentId)) {
+            throw new Exception("Assignment already exists");
+        }
+
         var descriptionList = new LinkedList<RubricDescription>();
 
         var criterionList = criteriaFiles.getCriteriaList();
@@ -49,14 +66,23 @@ public class PeerReviewSystem {
         }
     }
 
-    public void Assignment(String assignmentId, String studentId, AssignmentFiles assignmentFiles) {
+    public void Assignment(String assignmentId, String studentId, AssignmentFiles assignmentFiles) throws Exception {
+        if (assignmentFiles.getScoreList().size() < reviewerMin || assignmentFiles.getScoreList().size() > reviewerMax) {
+            System.out.printf("Assignment should be reviewed by %s-%s students.\n", reviewerMin, reviewerMax);
+            return;
+        }
+
         var assignment = assignments.get(assignmentId);
         var student = students.stream().filter(s -> Objects.equals(s.getId(), studentId)).findFirst().get();
+        var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().equals(student)).findFirst().get();
+
+        if (!doAssignment.getRanks().isEmpty()) {
+            throw new Exception("Assignment already reviewed");
+        }
 
         var scoreFiles = assignmentFiles.getScoreList();
         for (var scoreFile : scoreFiles) {
             var reviewer = students.stream().filter(s -> Objects.equals(s.getId(), scoreFile.reviewerId)).findFirst().get();
-            var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().equals(student)).findFirst().get();
 
             var criterionList = assignment.getRubric().getCriteria();
 
@@ -93,13 +119,17 @@ public class PeerReviewSystem {
         }
     }
 
-    public void calculateScore(String assignmentId, String studentId, String rankingStrategy) {
+    public void calculateScore(String assignmentId, String studentId, String rankingStrategy) throws Exception {
         var strategy = RankingStrategyFactory.create(rankingStrategy);
 
         var assignment = assignments.get(assignmentId);
         var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().getId().equals(studentId)).findFirst().get();
         var ranks = doAssignment.getRanks();
         var criterions = assignment.getRubric().getCriteria();
+
+        if (ranks.isEmpty()) {
+            throw new Exception("No ranks found");
+        }
 
         var totalScore = 0.0;
         for (var criterion : criterions) {
@@ -112,13 +142,17 @@ public class PeerReviewSystem {
         System.out.printf("Assignment: %s, Student: %s, Score: %.1f\n", assignmentId, studentId, totalScore / criterions.size());
     }
 
-    public void findStrength(String assignmentId, String studentId, String rankingStrategy) {
+    public void findStrength(String assignmentId, String studentId, String rankingStrategy) throws Exception {
         var strategy = RankingStrategyFactory.create(rankingStrategy);
 
         var assignment = assignments.get(assignmentId);
         var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().getId().equals(studentId)).findFirst().get();
         var ranks = doAssignment.getRanks();
         var criterions = assignment.getRubric().getCriteria();
+
+        if (ranks.isEmpty()) {
+            throw new Exception("No ranks found");
+        }
 
         var criterionScoreMap = new HashMap<Criterion, Double>();
 
@@ -140,12 +174,17 @@ public class PeerReviewSystem {
         System.out.printf("Assignment: %s, Student: %s, Strength:%s\n", assignmentId, studentId, criterionString);
     }
 
-    public void findWeakness(String assignmentId, String studentId, String rankingStrategy) {
+    public void findWeakness(String assignmentId, String studentId, String rankingStrategy) throws Exception {
         var strategy = RankingStrategyFactory.create(rankingStrategy);
 
         var assignment = assignments.get(assignmentId);
         var doAssignment = doAssignments.stream().filter(a -> a.getAssignment().equals(assignment) && a.getStudent().getId().equals(studentId)).findFirst().get();
         var ranks = doAssignment.getRanks();
+
+        if (ranks.isEmpty()) {
+            throw new Exception("No ranks found");
+        }
+
         var criterions = assignment.getRubric().getCriteria();
 
         var criterionScoreMap = new HashMap<Criterion, Double>();
